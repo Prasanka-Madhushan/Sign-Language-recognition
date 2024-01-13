@@ -31,7 +31,7 @@ with mp_hands.Hands(
 
                 # Make detections
                 image, results = mediapipe_detection(frame, hands)
-#                 print(results)
+                #                 print(results)
 
                 # Draw landmarks
                 draw_styled_landmarks(image, results)
