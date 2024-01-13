@@ -1,4 +1,4 @@
 
-<h1>Hand Gestures Translation</h1>
+<h1 align="center">Hand Gestures Translation</h1>
 
 ---
