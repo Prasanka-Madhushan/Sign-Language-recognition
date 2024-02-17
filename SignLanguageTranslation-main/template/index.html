@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Real-time sentence update</title>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('http://' + document.domain + ':' + location.port);
+            socket.on('connect', function() {
+                console.log('Connected to the server!');
+            });
+            socket.on('update_sentence', function(sentence) {
+                document.getElementById('sentence').innerHTML = sentence;
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Sentence: <span id="sentence"></span></h1>
+    </body>
+</html>
