@@ -8,9 +8,9 @@ class CallPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ZegoUIKitPrebuiltCall(
       appID:
-          1163145855, // Fill in the appID that you get from ZEGOCLOUD Admin Console.
+          2068228734, // Fill in the appID that you get from ZEGOCLOUD Admin Console.
       appSign:
-          "1f604df85b3275bdd46dc5ff51c4ca55315226e2a5cbb132e63cf095bc4e875d", // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
+          "d6da9de0e300aa0db094620e884c1b3b83c08c5315af0a59779308941aa67698", // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
       userID: 'user_id',
       userName: 'user_name',
       callID: callID,
