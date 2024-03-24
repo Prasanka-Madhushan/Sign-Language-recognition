@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:hand_gesture/camera.dart';
+import 'package:hand_gesture/speechHome.dart';
 import 'package:hand_gesture/youtube_player.dart';
 import 'package:hand_gesture/zeegocloud_home.dart';
 import 'aboutus.dart';
@@ -145,6 +146,10 @@ class Dashboard extends StatelessWidget {
           builder: (context) => HomeScreen(), // Adjust according to your setup
         ));
         break;
+      case "Translator":
+      // Navigate to SpeechScreen when "Translator" is tapped
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => speechHome()));
+      break;
       case "About Us":
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutUsPage()));
         break;

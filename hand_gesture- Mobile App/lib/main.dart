@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(), // Pass cameras to SplashScreen if needed
+      home: SplashScreen(), 
     );
   }
 }
