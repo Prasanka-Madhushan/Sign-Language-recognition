@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "517596444019",
+    "project_id": "signtranslator-bb053",
+    "storage_bucket": "signtranslator-bb053.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517596444019:android:843ad6a98d24e659314106",
+        "android_client_info": {
+          "package_name": "com.example.hand_gesture"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVK4eOgavUG0Z0O63-OOS_W0uU3eNlhrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

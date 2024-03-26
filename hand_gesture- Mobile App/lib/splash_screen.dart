@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'HomePage.dart'; // Update this import to point to your Homepage widget
-
+import 'package:hand_gesture/services/auth/auth_gate.dart';
+//import 'HomePage.dart'; // Update this import to point to your Homepage widget
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -12,9 +12,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Optional: Add a delay to simulate loading resources
-    Future.delayed(Duration(minutes: 10), () { // Reduced for quicker access during development
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
+    Future.delayed(Duration(seconds: 3), () { // Changed to 3 seconds for example
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => AuthGate()));
     });
   }
 
@@ -40,21 +39,12 @@ class _SplashScreenState extends State<SplashScreen> {
               Image.asset('images/sign.png', width: 100), // Replace with your asset
               SizedBox(height: 20),
               Text(
-                'Welcome to Our App',
+                'Welcome to Sign Translator',
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Colors.white),
               ),
               SizedBox(height: 20),
               SpinKitRipple(color: Colors.white, size: 100.0),
               SizedBox(height: 20),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.blue, backgroundColor: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HomePage()));
-                },
-                child: Text('Go to Homepage', style: TextStyle(fontSize: 20)),
-              ),
             ],
           ),
         ),

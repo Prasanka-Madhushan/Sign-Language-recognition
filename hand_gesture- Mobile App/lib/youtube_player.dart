@@ -40,35 +40,46 @@ class YoutubeVideoListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Playlist'),
-        backgroundColor: Colors.deepPurple, // Consider using ThemeData for app-wide consistency
+        backgroundColor: Colors.deepPurple,
       ),
-      body: ListView.builder(
-        itemCount: videos.length,
-        itemBuilder: (context, index) {
-          return Card(
-            elevation: 5, // Added elevation for better visual hierarchy
-            margin: EdgeInsets.all(8), // Added margin for spacing
-            child: ListTile(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => YoutubePlayerScreen(videoId: videos[index].videoId),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.deepPurple, Colors.indigo],
+          ),
+        ),
+        child: ListView.builder(
+          itemCount: videos.length,
+          itemBuilder: (context, index) {
+            return Card(
+              elevation: 5,
+              margin: EdgeInsets.all(8),
+              color: Colors.white, // Added white background for cards
+              child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => YoutubePlayerScreen(videoId: videos[index].videoId),
+                    ),
+                  );
+                },
+                leading: Image.network(videos[index].thumbnailUrl, width: 100),
+                title: Text(
+                  videos[index].title,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black, // Adjusted text color for better readability
                   ),
-                );
-              },
-              leading: Image.network(videos[index].thumbnailUrl, width: 100,), // Display thumbnail
-              title: Text(
-                videos[index].title,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
                 ),
+                trailing: Icon(Icons.play_circle_fill, color: Colors.red),
               ),
-              trailing: Icon(Icons.play_circle_fill, color: Colors.red,), // Play icon
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -103,24 +114,40 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('YouTube Video'),
-        backgroundColor: Colors.deepPurple, // Consistent color scheme
+        backgroundColor: Colors.deepPurple,
       ),
-      body: Column( // Use Column to arrange title and player vertically
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0), // Add padding around the title for better layout
-          
-        ),
-        SizedBox(height: 0), // Space between title and video player
-        Expanded( // Make YoutubePlayer take the remaining space
-          child: YoutubePlayer(
-            controller: _controller,
-            showVideoProgressIndicator: true,
-            progressIndicatorColor: Colors.deepPurple, // Custom progress bar color
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.deepPurple, Colors.indigo],
           ),
         ),
-      ],
-    ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Enjoy the Video!',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Expanded(
+              child: YoutubePlayer(
+                controller: _controller,
+                showVideoProgressIndicator: true,
+                progressIndicatorColor: Colors.red,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
