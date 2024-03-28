@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hand_gesture/components/chat_bubble.dart';
+// ignore: unused_import
 import 'package:hand_gesture/components/my_text_field.dart';
 import 'package:hand_gesture/services/chat/chat_service.dart';
 
@@ -24,109 +25,100 @@ class _ChatPageState extends State<ChatPage> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   void sendMessage() async {
-    //only send messgae if there is something to send
-    if(_messageController.text.isNotEmpty) {
+    if (_messageController.text.isNotEmpty) {
       await _chatService.sendMessage(
-        widget.receiverUserID, 
+        widget.receiverUserID,
         _messageController.text,
-        );
-    //clear the text controller afer sending the message
-    _messageController.clear();
+      );
+      _messageController.clear();
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.receiverUserEmail)),
-      body: Column(
-        children: [
-          //messages
-          Expanded(
-            child: _buildMessageList(),
-            ),
-
-            //user input
-            _buildMessageInput(),
-
-            const SizedBox(height: 25),
-        ],
+      appBar: AppBar(
+        title: Text(widget.receiverUserEmail),
+        backgroundColor: Colors.deepPurple, // Updated app bar color
       ),
-    );
-  }
-
-  //build message list
-  Widget _buildMessageList(){
-    return StreamBuilder(
-      stream: _chatService.getMessages(
-        widget.receiverUserID,_firebaseAuth.currentUser!.uid),
-        builder: (context, snapshot) {
-          if (snapshot.hasError){
-            return Text('Error${snapshot.error}');
-          }
-
-          if(snapshot.connectionState == ConnectionState.waiting){
-            return const Text('Loading...');
-          }
-
-          return ListView(
-            children: snapshot.data!.docs.map((document)=> _buildMessageItem(document)).toList(),
-          );
-        },
-      );
-  }
-
-
-  //build message item
-  Widget _buildMessageItem(DocumentSnapshot document){
-    Map<String,dynamic> data = document.data() as Map<String,dynamic>;
-
-    //align the message to the right if the sender is the current user, otherwise to the left
-    var alignment = (data['senderId']== _firebaseAuth.currentUser!.uid)
-    ?Alignment.centerRight
-    :Alignment.centerLeft;
-
-    return Container(
-      alignment: alignment,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+      body: Container(
+        color: Colors.deepPurple[50], // Updated background color
         child: Column(
-          crossAxisAlignment: (data['senderId'] == _firebaseAuth.currentUser!.uid)
-          ?CrossAxisAlignment.end
-          :CrossAxisAlignment.start,
-          mainAxisAlignment: (data['senderId'] == _firebaseAuth.currentUser!.uid)
-          ?MainAxisAlignment.end
-          :MainAxisAlignment.start,
           children: [
-            Text(data['senderEmail']),
-            const SizedBox(height: 5),
-            ChatBubble(message: data['message']),
+            Expanded(
+              child: _buildMessageList(),
+            ),
+            _buildMessageInput(),
+            const SizedBox(height: 10),
           ],
         ),
       ),
     );
   }
 
-  //build message input
-  Widget _buildMessageInput(){
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+  Widget _buildMessageList() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: _chatService.getMessages(widget.receiverUserID, _firebaseAuth.currentUser!.uid),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator()); // Improved loading indicator
+        }
+
+        return ListView(
+          children: snapshot.data!.docs.map((document) => _buildMessageItem(document)).toList(),
+        );
+      },
+    );
+  }
+
+  Widget _buildMessageItem(DocumentSnapshot document) {
+    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+    bool isSender = data['senderId'] == _firebaseAuth.currentUser!.uid;
+
+    return Align(
+      alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        child: ChatBubble(
+          message: data['message'],
+          isSender: isSender,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMessageInput() {
+    return Container(
+      color: Colors.white, // Input field background color
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
         children: [
           Expanded(
-            child: MyTextField(
+            child: TextField(
               controller: _messageController,
-              hintText: 'Enter Message',
-              obscureText: false,
+              decoration: InputDecoration(
+                hintText: 'Enter Message...',
+                border: InputBorder.none,
+                filled: true,
+                fillColor: Colors.grey[200], // Input field fill color
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               ),
+              textInputAction: TextInputAction.send,
+              onSubmitted: (value) => sendMessage(), // Send message on submit
             ),
-      
-            IconButton(
-              onPressed: sendMessage, 
-              icon: const Icon(
-                Icons.arrow_upward,
-                size: 40,
-              ),
-            )
+          ),
+          IconButton(
+            onPressed: sendMessage,
+            icon: const Icon(
+              Icons.send,
+              color: Colors.deepPurple, // Send button color
+              size: 30,
+            ),
+          )
         ],
       ),
     );

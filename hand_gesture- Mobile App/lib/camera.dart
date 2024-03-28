@@ -1,10 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:image_picker/image_picker.dart';
-//import 'package:tflite/tflite.dart';
 import 'package:tflite_v2/tflite_v2.dart';
+
+void main() => runApp(MaterialApp(home: HomePage()));
 
 class HomePage extends StatefulWidget {
   @override
@@ -31,79 +31,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Future<void> _optionsDialogBox() {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: Colors.blue,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  GestureDetector(
-                    child: Text(
-                      'Take a Picture',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    onTap: openCamera,
-                  ),
-                  Padding(padding: EdgeInsets.all(10.0)),
-                  GestureDetector(
-                    child: Text(
-                      'Choose from Gallery',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    onTap: openGallery,
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
-  Future<void> openCamera() async {
-  final XFile? pickedFile = await _picker.pickImage(source: ImageSource.camera);
-  Navigator.of(context).pop();
-  if (pickedFile != null) {
-    setState(() {
-      _loading = true;
-      _image = File(pickedFile.path);
-    });
-    classifyImage(_image!);
-  }
-}
-
-Future<void> openGallery() async {
-  final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-  Navigator.of(context).pop();
-  if (pickedFile != null) {
-    setState(() {
-      _loading = true;
-      _image = File(pickedFile.path);
-    });
-    classifyImage(_image!);
-  }
-}
-
-
-  void classifyImage(File image) async {
-    var output = await Tflite.runModelOnImage(
-      path: image.path,
-      numResults: 2,
-      threshold: 0.5,
-      imageMean: 127.5,
-      imageStd: 127.5,
-    );
-    setState(() {
-      _loading = false;
-      _outputs = output;
-    });
-  }
-
   Future<void> loadModel() async {
     await Tflite.loadModel(
       model: "assets/model_unquant.tflite",
@@ -127,41 +54,25 @@ Future<void> openGallery() async {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text('ASL Recognition'))),
-      body: Container(
+      appBar: AppBar(
+        title: Text('ASL Recognition'),
+        centerTitle: true,
+        leading: Navigator.of(
+          context).canPop() ? IconButton(
+            icon: Icon(
+              Icons.arrow_back, color: Colors.black), 
+              onPressed: () => Navigator.of(context).pop()) : null,
+      ),
+      body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            SizedBox(height: 170),
-            if (_loading)
-              Center(
-                child: CircularProgressIndicator(),
-              )
-            else
-              Center(
-                child: _image == null
-                    ? Text('No image selected.')
-                    : Column(
-                        children: [
-                          Image.file(_image!, height: 400, width: 400),
-                          SizedBox(height: 20),
-                          if (_outputs != null)
-                            Text(
-                              "${_outputs![0]["label"]}",
-                              style: TextStyle(fontSize: 20),
-                            ),
-                        ],
-                      ),
-              ),
-            SizedBox(height: 10),
-            if (_outputs != null)
-              Center(
-                child: FlatButton(
-                  onPressed: () {
-                    speak("${_outputs![0]["label"]}");
-                  },
-                  child: Icon(Icons.play_arrow, size: 60, color: Colors.blue),
-                ),
-              ),
+            SizedBox(height: 20),
+            _loading ? CircularProgressIndicator() : Container(),
+            _image != null ? Image.file(_image!, height: 300, width: double.infinity, fit: BoxFit.cover) : Text('No image selected.'),
+            SizedBox(height: 20),
+            _outputs != null ? Text("${_outputs![0]["label"]}", style: TextStyle(fontSize: 20)) : Container(),
+            SizedBox(height: 20),
+            _outputs != null ? ElevatedButton.icon(onPressed: () => speak("${_outputs![0]["label"]}"), icon: Icon(Icons.play_arrow), label: Text("Speak")) : Container(),
           ],
         ),
       ),
@@ -170,26 +81,74 @@ Future<void> openGallery() async {
   }
 
   Widget showFloatingActionButton() {
-    if (_image == null) {
-      return FloatingActionButton(
-        backgroundColor: Colors.green,
-        child: Icon(Icons.add_a_photo),
-        tooltip: 'Pick Image',
-        onPressed: _optionsDialogBox,
-      );
-    } else {
-      return FloatingActionButton(
-        backgroundColor: Colors.red,
-        child: Icon(Icons.delete),
-        onPressed: () {
-          setState(() {
-            _image = null;
-            _outputs = null; // Reset outputs as well
-          });
-        },
-      );
+    return FloatingActionButton(
+      backgroundColor: _image == null ? Colors.green : Colors.red,
+      child: Icon(_image == null ? Icons.add_a_photo : Icons.delete),
+      tooltip: 'Pick Image',
+      onPressed: _image == null ? _optionsDialogBox : _resetImage,
+    );
+  }
+
+  Future<void> _optionsDialogBox() {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.blue,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                TextButton(child: Text('Take a Picture'), onPressed: openCamera),
+                TextButton(child: Text('Choose from Gallery'), onPressed: openGallery),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> openCamera() async {
+    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    Navigator.of(context).pop();
+    _setImage(pickedFile);
+  }
+
+  Future<void> openGallery() async {
+    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    Navigator.of(context).pop();
+    _setImage(pickedFile);
+  }
+
+  void _setImage(XFile? pickedFile) {
+    if (pickedFile != null) {
+      setState(() {
+        _loading = true;
+        _image = File(pickedFile.path);
+      });
+      classifyImage(_image!);
     }
   }
-  
-  FlatButton({required Null Function() onPressed, required Icon child}) {}
+
+  void classifyImage(File image) async {
+    var output = await Tflite.runModelOnImage(
+      path: image.path,
+      numResults: 2,
+      threshold: 0.5,
+      imageMean: 127.5,
+      imageStd: 127.5,
+    );
+    setState(() {
+      _loading = false;
+      _outputs = output;
+    });
+  }
+
+  void _resetImage() {
+    setState(() {
+      _image = null;
+      _outputs = null;
+    });
+  }
 }

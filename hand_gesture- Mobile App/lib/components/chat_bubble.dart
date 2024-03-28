@@ -4,7 +4,7 @@ class ChatBubble extends StatelessWidget {
   final String message;
   const ChatBubble({
     super.key,
-    required this.message,
+    required this.message, required bool isSender,
   });
 
   @override

@@ -4,129 +4,129 @@ import 'package:hand_gesture/components/my_text_field.dart';
 import 'package:hand_gesture/services/auth/auth_service.dart';
 import 'package:provider/provider.dart';
 
-class RegisterPage extends StatefulWidget{
+class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
-  const RegisterPage ({super.key, required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-    //text controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  //sign up user
-  void signUp() async{
-    if (passwordController.text != confirmPasswordController.text){
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Password does not match"),
-        ),
-      );
-      return;
-    }
+  final _formKey = GlobalKey<FormState>();
 
-    //get auth service
-    final authService = Provider.of<AuthService>(context,listen:false);
-    
-    try{
+  void signUp() async {
+    if (!_formKey.currentState!.validate()) {
+      return; // If form is not valid, stop the sign-up process.
+    }
+    // Proceed with the authentication
+    final authService = Provider.of<AuthService>(context, listen: false);
+
+    try {
       await authService.signUpWithEmailAndPassword(
-        emailController.text, 
+        emailController.text,
         passwordController.text,
       );
-    }catch (e) {
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString()),
-        ),
+        SnackBar(content: Text(e.toString())),
       );
     }
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.blueGrey[900], // Updated background color
       body: SafeArea(
         child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 50),
-
-                //logo
-                Icon(
-                  Icons.message,
-                  size: 100,
-                  color: Colors.grey[800],
-                ),
-
-                const SizedBox(height: 50),
-            
-                //Create a account
-                const Text(
-                  "Let's create an account",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-
-                const SizedBox(height: 25),
-            
-                //email textfield
-                MyTextField(
-                  controller: emailController, 
-                  hintText: 'Email', 
-                  obscureText: false,
-                ),
-
-                const SizedBox(height: 10),
-
-                //password textfield
-                MyTextField(
-                  controller: passwordController, 
-                  hintText: 'Password', 
-                  obscureText: true,
-                ),
-
-                const SizedBox(height: 25),
-
-                //Confirm password textfield
-                MyTextField(
-                  controller: confirmPasswordController, 
-                  hintText: 'Confirm Password', 
-                  obscureText: true,
-                ),
-
-                const SizedBox(height: 25),
-
-                //sign up button
-                MyButton(onTap: signUp, text: "Sign Up"),
-
-                const SizedBox(height: 50),
-
-                //Not a member?Sign up
-                Row(
+          child: SingleChildScrollView( // Allows for scrolling when the keyboard is visible
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Already a member?'),
-                    const SizedBox(width: 4),
-                    GestureDetector(
-                      onTap: widget.onTap,
-                      child: const Text(
-                        'Login now',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
+                    const SizedBox(height: 50),
+
+                    Icon(
+                      Icons.account_circle,
+                      size: 100,
+                      color: Colors.indigoAccent,
+                    ),
+
+                    const SizedBox(height: 50),
+
+                    const Text(
+                      "Let's get you set up",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
+                    ),
+
+                    const SizedBox(height: 25),
+
+                    MyTextField(
+                      controller: emailController,
+                      hintText: 'Email',
+                      obscureText: false,
+                     // validator: (value) => value!.isEmpty || !value.contains('@') ? "Enter a valid email" : null,
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    MyTextField(
+                      controller: passwordController,
+                      hintText: 'Password',
+                      obscureText: true,
+                      //validator: (value) => value!.length < 6 ? "Password must be at least 6 characters" : null,
+                    ),
+
+                    const SizedBox(height: 25),
+
+                    MyTextField(
+                      controller: confirmPasswordController,
+                      hintText: 'Confirm Password',
+                      obscureText: true,
+                      //validator: (value) => value != passwordController.text ? "Passwords do not match" : null,
+                    ),
+
+                    const SizedBox(height: 25),
+
+                    MyButton(onTap: signUp, text: "Sign Up"),
+
+                    const SizedBox(height: 50),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Already a member?',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        const SizedBox(width: 4),
+                        GestureDetector(
+                          onTap: widget.onTap,
+                          child: const Text(
+                            'Login now',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.indigoAccent,
+                            ),
+                          ),
+                        )
+                      ],
                     )
                   ],
-                )
-              ],
+                ),
+              ),
             ),
           ),
         ),

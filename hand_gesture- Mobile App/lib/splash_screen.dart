@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hand_gesture/services/auth/auth_gate.dart';
-//import 'HomePage.dart'; // Update this import to point to your Homepage widget
+
 
 class SplashScreen extends StatefulWidget {
   @override

@@ -8,7 +8,7 @@ import 'package:hand_gesture/youtube_player.dart';
 import 'package:hand_gesture/zeegocloud_home.dart';
 import 'aboutus.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
 
 
 List<CameraDescription> cameras = [];
@@ -30,22 +30,6 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
-      backgroundColor: Colors.transparent,
-      color: Colors.indigoAccent,
-      animationDuration: Duration(milliseconds: 300),
-      height: 60,
-      items: <Widget>[
-      Icon(Icons.home, size: 30),
-      Icon(Icons.dashboard, size: 30),
-      Icon(Icons.person, size: 30),],
-    onTap: (index) {
-      setState(() {
-              index = index;
-            }
-          );
-        }
-      ),
       appBar: AppBar(
         title: Text(
           "Dashboard",
