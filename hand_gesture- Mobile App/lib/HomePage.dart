@@ -191,13 +191,13 @@ class HomeContent extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-            ElevatedButton(
+           /* ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => Dashboard(cameras: cameras)));
               },
               child: Text('Start', style: TextStyle(fontSize: 18, color: Colors.white)),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-            ),
+            ),*/
           ],
         ),
       ),
