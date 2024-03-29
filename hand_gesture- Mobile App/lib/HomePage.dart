@@ -1,6 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:hand_gesture/CommunityStories.dart';
+import 'package:hand_gesture/DailyChallenge.dart';
+import 'package:hand_gesture/Dictionary.dart';
+import 'package:hand_gesture/youtube_player.dart';
 import 'dashboard.dart';
  
 
@@ -33,11 +37,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      extendBody:true,
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         backgroundColor: Colors.transparent,
-        color: Colors.indigoAccent,
+        color: Colors.white,
         animationDuration: Duration(milliseconds: 300),
         height: 60,
         items: <Widget>[
@@ -64,9 +68,9 @@ class _HomePageState extends State<HomePage> {
 class HomeContent extends StatelessWidget {
   
   final List<Map<String, String>> carouselItems = [
-    {'image': 'images/bg1.jpg', 'text': 'Learn Sign Language'},
-    {'image': 'images/bg2.jpg', 'text': 'Communicate Effectively'},
-    {'image': 'images/a.jpg', 'text': 'Explore Resources'},
+    {'image': 'images/30.png', 'text': 'Learn Sign Language'},
+    {'image': 'images/40.jpg', 'text': 'Communicate Effectively'},
+    {'image': 'images/51.jpeg', 'text': 'Explore Resources'},
   ];
 
   final List<Widget> pageList = [
@@ -86,7 +90,7 @@ class HomeContent extends StatelessWidget {
         elevation: 0, // Remove app bar shadow
         actions: [
           IconButton(
-            icon: Icon(Icons.settings),
+            icon: Icon(Icons.person_2_rounded),
             onPressed: () {
               // Navigate to settings page or perform action
             },
@@ -100,12 +104,12 @@ class HomeContent extends StatelessWidget {
             SizedBox(height: 20),
             Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.transparent,
                 borderRadius: BorderRadius.circular(15.0),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
+                    color: Colors.transparent,
+                    spreadRadius: 4,
                     blurRadius: 5,
                     offset: Offset(0, 3),
                   ),
@@ -181,14 +185,57 @@ class HomeContent extends StatelessWidget {
                 ),
                 itemCount: 4, // Assuming 4 features for illustration
                 itemBuilder: (context, index) {
+                  // Feature names and icons (assuming you have icons for each)
+                  final features = [
+                    {'name': 'Interactive Lessons', 'icon': Icons.school},
+                    {'name': 'Daily Challenge', 'icon': Icons.lightbulb},
+                    {'name': 'Dictionary', 'icon': Icons.book},
+                    {'name': 'Community Stories', 'icon': Icons.people},
+                  ];
                   return Card(
                     elevation: 5,
-                    child: Center(
-                      child: Text('Feature ${index + 1}'),
+                    child: InkWell(
+                      onTap: () {
+                        // Handle tap here, navigate to different pages based on index
+                        switch (index) {
+                          case 0:
+                            // Navigate to Interactive Lessons
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => YoutubeVideoListScreen(videos: youtubeVideos)));
+                            break;
+                          case 1:
+                            // Navigate to Daily Challenge
+                            Navigator.push(
+                            context, 
+                            MaterialPageRoute(builder: (context) => DailyChallengePage()),
+                          );
+                            break;
+                          case 2:
+                            // Navigate to Dictionary
+                            Navigator.push(
+                              context, 
+                              MaterialPageRoute(builder: (context) => SignLanguageDictionaryPage()));
+                            break;
+                          case 3:
+                            // Navigate to Community Stories
+                            Navigator.push(context,
+                             MaterialPageRoute(builder: (context) => CommunityStoriesPage()));
+                            break;
+                        }
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(features[index]['icon'] as IconData, size: 50),
+                          SizedBox(height: 10),
+                          Text(features[index]['name'] as String),
+                        ],
+                      ),
                     ),
                   );
                 },
               ),
+
             ),
             SizedBox(height: 30),
            /* ElevatedButton(
