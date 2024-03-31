@@ -7,7 +7,6 @@ class DailyChallengePage extends StatefulWidget {
 }
 
 class _DailyChallengePageState extends State<DailyChallengePage> {
-  // A list of challenges
   final List<DailyChallenge> challenges = [
     DailyChallenge(
       sign: "ASL Sign for 'Thank You'",
@@ -21,7 +20,23 @@ class _DailyChallengePageState extends State<DailyChallengePage> {
       sign: "ASL Sign for 'Sorry'",
       description: "Practice the sign for 'Sorry'. It's important for expressing apologies.",
     ),
-    // Add more challenges here...
+    // Added more challenges
+    DailyChallenge(
+      sign: "ASL Sign for 'More'",
+      description: "Learn how to sign 'More'. Useful in many contexts, especially when eating.",
+    ),
+    DailyChallenge(
+      sign: "ASL Sign for 'Help'",
+      description: "Practice the sign for 'Help'. It can be vital in emergency situations or when you need assistance.",
+    ),
+    DailyChallenge(
+      sign: "ASL Sign for 'Love'",
+      description: "Learn how to sign 'Love'. Great for expressing your feelings to family, friends, and loved ones.",
+    ),
+    DailyChallenge(
+      sign: "ASL Sign for 'Friend'",
+      description: "Practice the sign for 'Friend'. It's a nice way to refer to or introduce someone you're close to.",
+    ),
   ];
 
   late DailyChallenge todayChallenge;
@@ -70,7 +85,7 @@ class _DailyChallengePageState extends State<DailyChallengePage> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Add action for practicing the sign, e.g., opening a video or a tutorial
+                // Implement the action for practicing the sign, such as opening a video or tutorial.
               },
               child: Text('Practice This Sign'),
               style: ElevatedButton.styleFrom(

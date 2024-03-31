@@ -27,7 +27,32 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
       definition: "A polite expression used when acknowledging a gift, service, or compliment.",
       imageUrl: "images/collaboration.png",
     ),
-    // Add more entries here
+    // Added more entries
+    SignLanguageEntry(
+      word: "Sorry",
+      definition: "An expression of apology or regret.",
+      imageUrl: "images/sign.png", // Adjust image path as necessary
+    ),
+    SignLanguageEntry(
+      word: "Please",
+      definition: "A polite expression used when asking for something.",
+      imageUrl: "images/collaboration.png", // Adjust image path as necessary
+    ),
+    SignLanguageEntry(
+      word: "Goodbye",
+      definition: "A farewell used when parting.",
+      imageUrl: "images/sign.png", // Adjust image path as necessary
+    ),
+    SignLanguageEntry(
+      word: "Love",
+      definition: "A strong feeling of affection.",
+      imageUrl: "images/collaboration.png", // Adjust image path as necessary
+    ),
+    SignLanguageEntry(
+      word: "Friend",
+      definition: "A person whom one knows and with whom one has a bond of mutual affection.",
+      imageUrl: "images/sign.png", // Adjust image path as necessary
+    ),
   ];
 
   // This controller will control the text input for the search functionality
@@ -59,10 +84,11 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
             child: ListView.builder(
               itemCount: entries.length,
               itemBuilder: (context, index) {
+                final entry = entries[index];
                 return ListTile(
-                  leading: Image.asset(entries[index].imageUrl, width: 50, height: 50),
-                  title: Text(entries[index].word),
-                  subtitle: Text(entries[index].definition),
+                  leading: Image.asset(entry.imageUrl, width: 50, height: 50),
+                  title: Text(entry.word),
+                  subtitle: Text(entry.definition),
                   onTap: () {
                     // Optional: Implement onTap to navigate to a detailed page for each entry
                   },
@@ -74,4 +100,10 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: SignLanguageDictionaryPage(),
+  ));
 }

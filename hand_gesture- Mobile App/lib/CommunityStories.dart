@@ -12,7 +12,22 @@ class CommunityStoriesPage extends StatelessWidget {
       user: "Jordan",
       story: "I found it hard to remember signs, but practice with friends helped a lot.",
     ),
-    // Add more stories here...
+    // Additional stories
+    CommunityStory(
+      title: "A Family Affair",
+      user: "Mia",
+      story: "My whole family started learning to sign together. It's brought us closer!",
+    ),
+    CommunityStory(
+      title: "Finding Community",
+      user: "Carlos",
+      story: "Joining a local signing club introduced me to many inspiring individuals.",
+    ),
+    CommunityStory(
+      title: "Technology and Learning",
+      user: "Priya",
+      story: "Using apps and videos made it easier to learn and practice signing in my own time.",
+    ),
   ];
 
   @override
@@ -46,4 +61,3 @@ class CommunityStory {
 
   CommunityStory({required this.title, required this.user, required this.story});
 }
-
