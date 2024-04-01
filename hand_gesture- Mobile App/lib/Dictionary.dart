@@ -27,7 +27,6 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
       definition: "A polite expression used when acknowledging a gift, service, or compliment.",
       imageUrl: "images/collaboration.png",
     ),
-    // Added more entries
     SignLanguageEntry(
       word: "Sorry",
       definition: "An expression of apology or regret.",
@@ -53,7 +52,49 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
       definition: "A person whom one knows and with whom one has a bond of mutual affection.",
       imageUrl: "images/sign.png", // Adjust image path as necessary
     ),
-  ];
+    // New entries added below
+    SignLanguageEntry(
+      word: "Family",
+      definition: "A group consisting of parents and children living together in a household.",
+      imageUrl: "images/sign.png",
+    ),
+    SignLanguageEntry(
+      word: "Help",
+      definition: "To make it easier for (someone) to do something by offering one's services or resources.",
+      imageUrl: "images/collaboration.png",
+    ),
+    SignLanguageEntry(
+      word: "Eat",
+      definition: "Put (food) into the mouth and chew and swallow it.",
+      imageUrl: "images/sign.png",
+    ),
+    SignLanguageEntry(
+      word: "Drink",
+      definition: "Take (a liquid) into the mouth and swallow.",
+      imageUrl: "images/collaboration.png",
+    ),
+    SignLanguageEntry(
+      word: "Happy",
+      definition: "Feeling or showing pleasure or contentment.",
+      imageUrl: "images/sign.png",
+    ),
+    SignLanguageEntry(
+      word: "Sad",
+      definition: "Feeling or showing sorrow; unhappy.",
+      imageUrl: "images/collaboration.png",
+    ),
+    SignLanguageEntry(
+      word: "School",
+      definition: "An institution for educating children.",
+      imageUrl: "images/sign.png",
+    ),
+    SignLanguageEntry(
+      word: "Work",
+      definition: "Activity involving mental or physical effort done in order to achieve a purpose or result.",
+      imageUrl: "images/collaboration.png",
+    ),
+];
+
 
   // This controller will control the text input for the search functionality
   final TextEditingController _searchController = TextEditingController();

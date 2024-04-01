@@ -20,7 +20,6 @@ class _DailyChallengePageState extends State<DailyChallengePage> {
       sign: "ASL Sign for 'Sorry'",
       description: "Practice the sign for 'Sorry'. It's important for expressing apologies.",
     ),
-    // Added more challenges
     DailyChallenge(
       sign: "ASL Sign for 'More'",
       description: "Learn how to sign 'More'. Useful in many contexts, especially when eating.",
@@ -37,7 +36,37 @@ class _DailyChallengePageState extends State<DailyChallengePage> {
       sign: "ASL Sign for 'Friend'",
       description: "Practice the sign for 'Friend'. It's a nice way to refer to or introduce someone you're close to.",
     ),
-  ];
+    // New challenges added below
+    DailyChallenge(
+      sign: "ASL Sign for 'Family'",
+      description: "Learn how to sign 'Family'. Essential for talking about those close to you.",
+    ),
+    DailyChallenge(
+      sign: "ASL Sign for 'Happy'",
+      description: "Practice the sign for 'Happy'. Useful for expressing joy and happiness.",
+    ),
+    DailyChallenge(
+      sign: "ASL Sign for 'Eat'",
+      description: "Learn how to sign 'Eat'. Basic need, commonly used around meal times.",
+    ),
+    DailyChallenge(
+      sign: "ASL Sign for 'Drink'",
+      description: "Practice the sign for 'Drink'. Useful for expressing the need for a beverage.",
+    ),
+    DailyChallenge(
+      sign: "ASL Sign for 'Home'",
+      description: "Learn how to sign 'Home'. Central to discussions about where you live or gatherings.",
+    ),
+    DailyChallenge(
+      sign: "ASL Sign for 'School'",
+      description: "Practice the sign for 'School'. Relevant for students and discussions about education.",
+    ),
+    DailyChallenge(
+      sign: "ASL Sign for 'Work'",
+      description: "Learn how to sign 'Work'. Important for conversations about employment or tasks.",
+    ),
+];
+
 
   late DailyChallenge todayChallenge;
 
