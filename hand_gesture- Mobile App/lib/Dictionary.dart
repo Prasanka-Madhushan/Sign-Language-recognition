@@ -20,78 +20,78 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
     SignLanguageEntry(
       word: "Hello",
       definition: "A greeting used when meeting someone.",
-      imageUrl: "images/sign.png", // Example image path in your assets
+      imageUrl: "images/dict/hello.png", // Example image path in your assets
     ),
     SignLanguageEntry(
       word: "Thank You",
       definition: "A polite expression used when acknowledging a gift, service, or compliment.",
-      imageUrl: "images/collaboration.png",
+      imageUrl: "images/dict/thankyou.png",
     ),
     SignLanguageEntry(
       word: "Sorry",
       definition: "An expression of apology or regret.",
-      imageUrl: "images/sign.png", // Adjust image path as necessary
+      imageUrl: "images/dict/sorry.png", // Adjust image path as necessary
     ),
     SignLanguageEntry(
       word: "Please",
       definition: "A polite expression used when asking for something.",
-      imageUrl: "images/collaboration.png", // Adjust image path as necessary
+      imageUrl: "images/dict/please.png", // Adjust image path as necessary
     ),
     SignLanguageEntry(
       word: "Goodbye",
       definition: "A farewell used when parting.",
-      imageUrl: "images/sign.png", // Adjust image path as necessary
+      imageUrl: "images/dict/goodbye.png", // Adjust image path as necessary
     ),
     SignLanguageEntry(
       word: "Love",
       definition: "A strong feeling of affection.",
-      imageUrl: "images/collaboration.png", // Adjust image path as necessary
+      imageUrl: "images/dict/love.png", // Adjust image path as necessary
     ),
     SignLanguageEntry(
       word: "Friend",
       definition: "A person whom one knows and with whom one has a bond of mutual affection.",
-      imageUrl: "images/sign.png", // Adjust image path as necessary
+      imageUrl: "images/dict/friends.png", // Adjust image path as necessary
     ),
     // New entries added below
     SignLanguageEntry(
       word: "Family",
       definition: "A group consisting of parents and children living together in a household.",
-      imageUrl: "images/sign.png",
+      imageUrl: "images/dict/family.png",
     ),
     SignLanguageEntry(
       word: "Help",
       definition: "To make it easier for (someone) to do something by offering one's services or resources.",
-      imageUrl: "images/collaboration.png",
+      imageUrl: "images/dict/help.png",
     ),
     SignLanguageEntry(
       word: "Eat",
       definition: "Put (food) into the mouth and chew and swallow it.",
-      imageUrl: "images/sign.png",
+      imageUrl: "images/dict/eat.png",
     ),
     SignLanguageEntry(
       word: "Drink",
       definition: "Take (a liquid) into the mouth and swallow.",
-      imageUrl: "images/collaboration.png",
+      imageUrl: "images/dict/drink.png",
     ),
     SignLanguageEntry(
       word: "Happy",
       definition: "Feeling or showing pleasure or contentment.",
-      imageUrl: "images/sign.png",
+      imageUrl: "images/dict/happy.png",
     ),
     SignLanguageEntry(
       word: "Sad",
       definition: "Feeling or showing sorrow; unhappy.",
-      imageUrl: "images/collaboration.png",
+      imageUrl: "images/dict/sad.png",
     ),
     SignLanguageEntry(
       word: "School",
       definition: "An institution for educating children.",
-      imageUrl: "images/sign.png",
+      imageUrl: "images/dict/school.png",
     ),
     SignLanguageEntry(
       word: "Work",
       definition: "Activity involving mental or physical effort done in order to achieve a purpose or result.",
-      imageUrl: "images/collaboration.png",
+      imageUrl: "images/dict/work.png",
     ),
 ];
 
