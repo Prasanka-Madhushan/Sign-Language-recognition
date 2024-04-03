@@ -37,10 +37,10 @@ class Dashboard extends StatelessWidget {
             fontSize: 24,
             fontWeight: FontWeight.bold,
             letterSpacing: 2.0,
-            // Additional text styling options can go here
+            
           ),
         ),
-        centerTitle: true, // Centers the title
+        centerTitle: true, 
         backgroundColor: Colors.deepPurple,
       ),
 
@@ -128,14 +128,14 @@ class Dashboard extends StatelessWidget {
         break;
       case "Video Call":
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => HomeScreen(), // Adjust according to your setup
+          builder: (context) => HomeScreen(), 
         ));
         break;
       case "Chat":
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChatRoom()));
         break;
       case "Translator":
-      // Navigate to SpeechScreen when "Translator" is tapped
+      
       Navigator.of(context).push(MaterialPageRoute(builder: (context) => speechHome()));
       break;
       case "About Us":

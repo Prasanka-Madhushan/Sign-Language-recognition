@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// Example data class for sign language entries
 class SignLanguageEntry {
   final String word;
   final String definition;
@@ -9,7 +8,6 @@ class SignLanguageEntry {
   SignLanguageEntry({required this.word, required this.definition, required this.imageUrl});
 }
 
-// SignLanguageDictionaryPage Widget
 class SignLanguageDictionaryPage extends StatefulWidget {
   @override
   _SignLanguageDictionaryPageState createState() => _SignLanguageDictionaryPageState();
@@ -40,19 +38,18 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
     SignLanguageEntry(
       word: "Goodbye",
       definition: "A farewell used when parting.",
-      imageUrl: "images/dict/goodbye.png", // Adjust image path as necessary
+      imageUrl: "images/dict/goodbye.png", 
     ),
     SignLanguageEntry(
       word: "Love",
       definition: "A strong feeling of affection.",
-      imageUrl: "images/dict/love.png", // Adjust image path as necessary
+      imageUrl: "images/dict/love.png", 
     ),
     SignLanguageEntry(
       word: "Friend",
       definition: "A person whom one knows and with whom one has a bond of mutual affection.",
-      imageUrl: "images/dict/friends.png", // Adjust image path as necessary
+      imageUrl: "images/dict/friends.png", 
     ),
-    // New entries added below
     SignLanguageEntry(
       word: "Family",
       definition: "A group consisting of parents and children living together in a household.",
@@ -95,16 +92,48 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
     ),
 ];
 
+  // This will hold the filtered entries for display in the UI
+  List<SignLanguageEntry> filteredEntries = [];
 
   // This controller will control the text input for the search functionality
   final TextEditingController _searchController = TextEditingController();
+
+   @override
+  void initState() {
+    super.initState();
+    // Initially, all entries are displayed
+    filteredEntries = entries;
+    _searchController.addListener(_filterEntries);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_filterEntries);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _filterEntries() {
+    final query = _searchController.text.toLowerCase();
+    if (query.isEmpty) {
+      setState(() => filteredEntries = entries);
+    } else {
+      setState(() {
+        filteredEntries = entries
+            .where((entry) =>
+                entry.word.toLowerCase().contains(query) ||
+                entry.definition.toLowerCase().contains(query))
+            .toList();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Sign Language Dictionary'),
-        backgroundColor: Colors.indigoAccent,
+        backgroundColor: Colors.deepPurple,
       ),
       body: Column(
         children: [
@@ -114,25 +143,43 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
               controller: _searchController,
               decoration: InputDecoration(
                 labelText: 'Search for a word',
-                suffixIcon: Icon(Icons.search),
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () => _searchController.clear(),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                  borderSide: BorderSide(),
+                ),
+                filled: true,
+                fillColor: Colors.grey[200],
               ),
-              onChanged: (value) {
-                // Optional: Implement search functionality here
-              },
             ),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: entries.length,
+              itemCount: filteredEntries.length,
               itemBuilder: (context, index) {
-                final entry = entries[index];
-                return ListTile(
-                  leading: Image.asset(entry.imageUrl, width: 50, height: 50),
-                  title: Text(entry.word),
-                  subtitle: Text(entry.definition),
-                  onTap: () {
-                    // Optional: Implement onTap to navigate to a detailed page for each entry
-                  },
+                final entry = filteredEntries[index];
+                return Card(
+                  margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                    leading: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: AssetImage(entry.imageUrl),
+                      backgroundColor: Colors.transparent,
+                    ),
+                    title: Text(entry.word, style: TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: Text(entry.definition),
+                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.deepPurple),
+                    onTap: () {
+                      // Implement onTap functionality here, if necessary
+                    },
+                  ),
                 );
               },
             ),

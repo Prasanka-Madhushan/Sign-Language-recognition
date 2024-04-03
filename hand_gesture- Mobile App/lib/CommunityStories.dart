@@ -27,7 +27,6 @@ class CommunityStoriesPage extends StatelessWidget {
       user: "Priya",
       story: "Using apps and videos made it easier to learn and practice signing in my own time.",
     ),
-    // New stories added below
     CommunityStory(
       title: "Unexpected Connections",
       user: "Eli",
@@ -61,17 +60,41 @@ class CommunityStoriesPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Community Stories'),
-        backgroundColor: Colors.indigoAccent,
+        backgroundColor: Colors.deepPurple,
       ),
       body: ListView.builder(
         itemCount: stories.length,
         itemBuilder: (context, index) {
           final story = stories[index];
-          return Card(
+          return Container(
             margin: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 7,
+                  offset: Offset(0, 3),
+                ),
+              ],
+              borderRadius: BorderRadius.circular(15), 
+            ),
             child: ListTile(
-              title: Text(story.title, style: TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text("${story.user} says, \"${story.story}\""),
+              leading: Icon(Icons.person, color: Colors.deepPurple), 
+              title: Text(
+                story.title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  // fontFamily: 'CustomFont',
+                ),
+              ),
+              subtitle: Text(
+                "${story.user} says, \"${story.story}\"",
+                // style: TextStyle(fontFamily: 'CustomFont'), 
+              ),
+              isThreeLine: true,
+              trailing: Icon(Icons.arrow_forward, color: Colors.deepPurple),
             ),
           );
         },
