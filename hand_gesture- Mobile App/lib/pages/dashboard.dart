@@ -36,12 +36,12 @@ class Dashboard extends StatelessWidget {
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
+            color: Colors.white,
             letterSpacing: 2.0,
-            
           ),
         ),
         centerTitle: true, 
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.indigo,
       ),
 
       body: Container(
@@ -49,7 +49,7 @@ class Dashboard extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Colors.deepPurple, Colors.indigo],
+            colors: [Colors.indigo, Colors.deepPurple.shade400],
           ),
         ),
         child: AnimationLimiter(

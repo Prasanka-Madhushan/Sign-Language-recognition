@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.transparent,
         color: Colors.white,
         animationDuration: Duration(milliseconds: 300),
-        height: 60,
+        height: 50,
         items: <Widget>[
           Icon(Icons.home, size: 30, color: Colors.black),
           Icon(Icons.dashboard, size: 30, color: Colors.black),
@@ -69,15 +69,15 @@ class _HomePageState extends State<HomePage> {
 class HomeContent extends StatelessWidget {
   
   final List<Map<String, String>> carouselItems = [
-    {'image': 'images/30.png', 'text': 'Learn Sign Language'},
-    {'image': 'images/40.jpg', 'text': 'Communicate Effectively'},
-    {'image': 'images/51.jpeg', 'text': 'Explore Resources'},
+    {'image': 'images/sign2.jpg', 'text': 'Learn Sign Language'},
+    {'image': 'images/sign3.jpg', 'text': 'Communicate Effectively'},
+    {'image': 'images/sign1.jpg', 'text': 'Explore Resources'},
   ];
 
   final List<Widget> pageList = [
     HomePage(),
     Dashboard(cameras: cameras), 
-   // ProfilePage(), 
+    ProfilePage(), 
   ];
 
   @override
@@ -85,10 +85,18 @@ class HomeContent extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.indigoAccent,
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text(
+          "Home",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 2.0,
+            color: Colors.white,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.indigoAccent,
-        elevation: 0, // Remove app bar shadow
+        elevation: 6, 
         actions: [
           IconButton(
             icon: Icon(Icons.person_2_rounded),

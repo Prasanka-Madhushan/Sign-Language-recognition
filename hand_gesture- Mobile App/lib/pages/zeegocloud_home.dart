@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[900], // Updated background color
+      backgroundColor: Colors.blueGrey[900],
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white, // Text color
+                  color: Colors.white, 
                 ),
               ),
               SizedBox(height: 20),

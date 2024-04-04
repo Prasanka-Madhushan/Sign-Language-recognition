@@ -14,7 +14,7 @@ class speechHome extends StatelessWidget {
       title: 'Sign Translator',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: AnimatedSplashScreen(
@@ -22,7 +22,7 @@ class speechHome extends StatelessWidget {
         duration: 1000,
         nextScreen: const SpeechScreen(),
         splashTransition: SplashTransition.fadeTransition,
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.indigo,
         pageTransitionType: PageTransitionType.fade,
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:hand_gesture/pages/HomePage.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:hand_gesture/pages/utils.dart' as utils;
 
@@ -52,9 +53,12 @@ class _SpeechScreenState extends State<SpeechScreen> {
       appBar: AppBar(
         title:
         const Text(
-            'Translator',
+            'Speech Translator',
           style: TextStyle(
-            color: Colors.indigoAccent,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 2.0,
+            color: Colors.black,
           ),
         ),
         centerTitle: true,
@@ -62,7 +66,9 @@ class _SpeechScreenState extends State<SpeechScreen> {
           builder: (BuildContext context) {
             return IconButton(
               icon: new Image.asset("assets/logo/Splash2.png"),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));
+              },
             );
           },
         ),
@@ -96,7 +102,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
 
                 const Divider(
                   thickness: 2,
-                  color: Colors.orange,
+                  color: Colors.indigo,
                   indent: 20,
                   endIndent: 20,
                 ),
@@ -123,7 +129,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
 
                 const Divider(
                   thickness: 2,
-                  color: Colors.orange,
+                  color: Colors.indigo,
                   indent: 20,
                   endIndent: 20,
                 ),

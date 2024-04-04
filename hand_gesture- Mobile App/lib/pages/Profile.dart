@@ -88,6 +88,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     final String userEmail = user?.email ?? 'N/A';
 
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(

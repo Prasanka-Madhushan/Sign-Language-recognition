@@ -24,7 +24,7 @@ class _ChatRoomState extends State<ChatRoom> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.indigoAccent,
+        backgroundColor: Colors.indigo,
         title: const Text('Messenger'),
         actions: [
           IconButton(

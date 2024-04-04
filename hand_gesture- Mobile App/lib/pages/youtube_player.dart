@@ -40,14 +40,14 @@ class YoutubeVideoListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Playlist'),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.indigo,
       ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.deepPurple, Colors.indigo],
+            colors: [Colors.indigo, Colors.deepPurple.shade400],
           ),
         ),
         child: ListView.builder(
