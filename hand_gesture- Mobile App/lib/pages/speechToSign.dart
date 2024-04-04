@@ -205,8 +205,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
             _text = val.recognizedWords;
           }),
         );
-        // await Future.delayed(const Duration(seconds: 3));
-        // translation(_text);
+        
       }
     } else {
       setState(() => _isListening = false);
