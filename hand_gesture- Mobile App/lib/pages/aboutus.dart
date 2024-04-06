@@ -6,9 +6,9 @@ class AboutUsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('About Us'),
-        backgroundColor: Colors.deepPurple, // Use your app's theme color
+        backgroundColor: Colors.deepPurple, 
       ),
-      body: SingleChildScrollView( // Allows for scrolling
+      body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(20),
           child: Column(
@@ -18,7 +18,7 @@ class AboutUsPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
-                    'images/about.png', // Add an image related to your app or company
+                    'images/about.png', 
                     width: 200.0,
                     height: 180.0,
                     fit: BoxFit.cover,
@@ -31,7 +31,7 @@ class AboutUsPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple, // Use your app's theme color
+                  color: Colors.deepPurple, 
                 ),
               ),
               SizedBox(height: 20),
@@ -40,17 +40,17 @@ class AboutUsPage extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  height: 1.5, // Line spacing
+                  height: 1.5, 
                 ),
               ),
               SizedBox(height: 20),
-              // Optionally, add more sections or contact info
+             
               Text(
                 'Contact Us',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple, // Use your app's theme color
+                  color: Colors.deepPurple, 
                 ),
               ),
               SizedBox(height: 10),
@@ -59,7 +59,7 @@ class AboutUsPage extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  height: 1.5, // Line spacing
+                  height: 1.5, 
                 ),
               ),
             ],
