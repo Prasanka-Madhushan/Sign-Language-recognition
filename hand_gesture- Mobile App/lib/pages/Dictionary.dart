@@ -18,7 +18,7 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
     SignLanguageEntry(
       word: "Hello",
       definition: "A greeting used when meeting someone.",
-      imageUrl: "images/dict/hello.png", // Example image path in your assets
+      imageUrl: "images/dict/hello.png", 
     ),
     SignLanguageEntry(
       word: "Thank You",
@@ -28,12 +28,12 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
     SignLanguageEntry(
       word: "Sorry",
       definition: "An expression of apology or regret.",
-      imageUrl: "images/dict/sorry.png", // Adjust image path as necessary
+      imageUrl: "images/dict/sorry.png",
     ),
     SignLanguageEntry(
       word: "Please",
       definition: "A polite expression used when asking for something.",
-      imageUrl: "images/dict/please.png", // Adjust image path as necessary
+      imageUrl: "images/dict/please.png", 
     ),
     SignLanguageEntry(
       word: "Goodbye",
@@ -177,7 +177,7 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
                     subtitle: Text(entry.definition),
                     trailing: Icon(Icons.arrow_forward_ios, color: Colors.deepPurple),
                     onTap: () {
-                      // Implement onTap functionality here, if necessary
+                      
                     },
                   ),
                 );
