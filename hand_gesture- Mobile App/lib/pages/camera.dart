@@ -57,22 +57,33 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('ASL Recognition'),
         centerTitle: true,
-        leading: Navigator.of(
-          context).canPop() ? IconButton(
-            icon: Icon(
-              Icons.arrow_back, color: Colors.black), 
-              onPressed: () => Navigator.of(context).pop()) : null,
+        leading: Navigator.of(context).canPop()
+            ? IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () => Navigator.of(context).pop())
+            : null,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             SizedBox(height: 20),
             _loading ? CircularProgressIndicator() : Container(),
-            _image != null ? Image.file(_image!, height: 300, width: double.infinity, fit: BoxFit.cover) : Text('No image selected.'),
+            _image != null
+                ? Image.file(_image!,
+                    height: 300, width: double.infinity, fit: BoxFit.cover)
+                : Text('No image selected.'),
             SizedBox(height: 20),
-            _outputs != null ? Text("${_outputs![0]["label"]}", style: TextStyle(fontSize: 20)) : Container(),
+            _outputs != null
+                ? Text("${_outputs![0]["label"]}",
+                    style: TextStyle(fontSize: 20))
+                : Container(),
             SizedBox(height: 20),
-            _outputs != null ? ElevatedButton.icon(onPressed: () => speak("${_outputs![0]["label"]}"), icon: Icon(Icons.play_arrow), label: Text("Speak")) : Container(),
+            _outputs != null
+                ? ElevatedButton.icon(
+                    onPressed: () => speak("${_outputs![0]["label"]}"),
+                    icon: Icon(Icons.play_arrow),
+                    label: Text("Speak"))
+                : Container(),
           ],
         ),
       ),
@@ -95,12 +106,15 @@ class _HomePageState extends State<HomePage> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.blue,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                TextButton(child: Text('Take a Picture'), onPressed: openCamera),
-                TextButton(child: Text('Choose from Gallery'), onPressed: openGallery),
+                TextButton(
+                    child: Text('Take a Picture'), onPressed: openCamera),
+                TextButton(
+                    child: Text('Choose from Gallery'), onPressed: openGallery),
               ],
             ),
           ),
@@ -110,13 +124,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> openCamera() async {
-    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.camera);
     Navigator.of(context).pop();
     _setImage(pickedFile);
   }
 
   Future<void> openGallery() async {
-    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
     Navigator.of(context).pop();
     _setImage(pickedFile);
   }

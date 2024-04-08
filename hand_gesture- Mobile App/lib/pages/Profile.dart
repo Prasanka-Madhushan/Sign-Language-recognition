@@ -10,7 +10,8 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStateMixin {
+class _ProfilePageState extends State<ProfilePage>
+    with SingleTickerProviderStateMixin {
   final User? user = FirebaseAuth.instance.currentUser;
   final TextEditingController _bioController = TextEditingController();
   String _userBio = "Tap to edit bio...";
@@ -20,7 +21,8 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: Duration(seconds: 1));
+    _controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
     _opacity = Tween<double>(begin: 0.0, end: 1.0).animate(_controller!)
       ..addListener(() {
         setState(() {});
@@ -34,6 +36,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     _controller?.dispose();
     super.dispose();
   }
+
   void _editBio() async {
     // Show dialog to edit bio
     return showDialog<void>(
@@ -72,7 +75,8 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     try {
       final authService = Provider.of<AuthService>(context, listen: false);
       await authService.signOut();
-      Navigator.of(context).pushReplacementNamed('/login'); // Assuming '/login' is your route to the login screen
+      Navigator.of(context).pushReplacementNamed(
+          '/login'); // Assuming '/login' is your route to the login screen
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -84,7 +88,8 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    final String profileImagePlaceholder = 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+    final String profileImagePlaceholder =
+        'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
     final String userEmail = user?.email ?? 'N/A';
 
     return Scaffold(
@@ -103,7 +108,8 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
               SizedBox(height: 40),
               CircleAvatar(
                 radius: 60,
-                backgroundImage: NetworkImage(user?.photoURL ?? profileImagePlaceholder),
+                backgroundImage:
+                    NetworkImage(user?.photoURL ?? profileImagePlaceholder),
                 backgroundColor: Colors.transparent,
               ),
               SizedBox(height: 20),

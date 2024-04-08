@@ -44,7 +44,8 @@ class _RegisterPageState extends State<RegisterPage> {
       backgroundColor: Colors.blueGrey[900], // Updated background color
       body: SafeArea(
         child: Center(
-          child: SingleChildScrollView( // Allows for scrolling when the keyboard is visible
+          child: SingleChildScrollView(
+            // Allows for scrolling when the keyboard is visible
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Form(
@@ -53,15 +54,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 50),
-
                     Icon(
                       Icons.account_circle,
                       size: 100,
                       color: Colors.indigoAccent,
                     ),
-
                     const SizedBox(height: 50),
-
                     const Text(
                       "Let's get you set up",
                       style: TextStyle(
@@ -70,40 +68,30 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                     const SizedBox(height: 25),
-
                     MyTextField(
                       controller: emailController,
                       hintText: 'Email',
                       obscureText: false,
-                     // validator: (value) => value!.isEmpty || !value.contains('@') ? "Enter a valid email" : null,
+                      // validator: (value) => value!.isEmpty || !value.contains('@') ? "Enter a valid email" : null,
                     ),
-
                     const SizedBox(height: 10),
-
                     MyTextField(
                       controller: passwordController,
                       hintText: 'Password',
                       obscureText: true,
                       //validator: (value) => value!.length < 6 ? "Password must be at least 6 characters" : null,
                     ),
-
                     const SizedBox(height: 25),
-
                     MyTextField(
                       controller: confirmPasswordController,
                       hintText: 'Confirm Password',
                       obscureText: true,
                       //validator: (value) => value != passwordController.text ? "Passwords do not match" : null,
                     ),
-
                     const SizedBox(height: 25),
-
                     MyButton(onTap: signUp, text: "Sign Up"),
-
                     const SizedBox(height: 50),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

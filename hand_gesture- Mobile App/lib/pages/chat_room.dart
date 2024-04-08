@@ -74,7 +74,9 @@ class _ChatRoomState extends State<ChatRoom> {
       return ListTile(
         title: Text(
           data['email'],
-          style: TextStyle(fontSize: 18, color: Colors.white), // Increase font size and change text color
+          style: TextStyle(
+              fontSize: 18,
+              color: Colors.white), // Increase font size and change text color
         ),
         onTap: () {
           Navigator.push(

@@ -13,13 +13,15 @@ class CustomFloatingActionButtonLocation extends FloatingActionButtonLocation {
   @override
   Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
     // Horizontal alignment (center)
-    final double centerX = (scaffoldGeometry.scaffoldSize.width / 2.0) - (scaffoldGeometry.floatingActionButtonSize.width / 2.0);
+    final double centerX = (scaffoldGeometry.scaffoldSize.width / 2.0) -
+        (scaffoldGeometry.floatingActionButtonSize.width / 2.0);
     // Vertical alignment (upwards from bottom)
-    final double bottomHeight = scaffoldGeometry.scaffoldSize.height - scaffoldGeometry.floatingActionButtonSize.height - scaffoldGeometry.bottomSheetSize.height;
+    final double bottomHeight = scaffoldGeometry.scaffoldSize.height -
+        scaffoldGeometry.floatingActionButtonSize.height -
+        scaffoldGeometry.bottomSheetSize.height;
     return Offset(centerX + offsetX, bottomHeight - offsetY);
   }
 }
-
 
 class SpeechScreen extends StatefulWidget {
   const SpeechScreen({Key? key}) : super(key: key);
@@ -29,7 +31,6 @@ class SpeechScreen extends StatefulWidget {
 }
 
 class _SpeechScreenState extends State<SpeechScreen> {
-
   stt.SpeechToText _speech = stt.SpeechToText();
   bool _isListening = false;
   String _text = '';
@@ -45,15 +46,12 @@ class _SpeechScreenState extends State<SpeechScreen> {
     _speech = stt.SpeechToText();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-        const Text(
-            'Speech Translator',
+        title: const Text(
+          'Speech Translator',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -67,16 +65,14 @@ class _SpeechScreenState extends State<SpeechScreen> {
             return IconButton(
               icon: new Image.asset("assets/logo/Splash2.png"),
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => HomePage()));
               },
             );
           },
         ),
       ),
-
-
       body: RefreshIndicator(
-
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
@@ -93,11 +89,11 @@ class _SpeechScreenState extends State<SpeechScreen> {
                       alignment: Alignment.center,
                       key: ValueKey<int>(_state),
                       width: MediaQuery.of(context).size.width,
-                      height: (4/3) * MediaQuery.of(context).size.width,
+                      height: (4 / 3) * MediaQuery.of(context).size.width,
                     ),
                   ),
                   width: MediaQuery.of(context).size.width,
-                  height: (4/3) * MediaQuery.of(context).size.width,
+                  height: (4 / 3) * MediaQuery.of(context).size.width,
                 ),
 
                 const Divider(
@@ -134,7 +130,6 @@ class _SpeechScreenState extends State<SpeechScreen> {
                   endIndent: 20,
                 ),
 
-
                 // Expanded(
                 //   child:
                 //   Container(
@@ -152,28 +147,28 @@ class _SpeechScreenState extends State<SpeechScreen> {
                 //     ),
                 //   ),
                 // ),
-
               ],
             ),
           ),
         ),
-
         onRefresh: () {
           return Future.delayed(
             const Duration(seconds: 1),
-                () { setState(() {
-                  _text = '';
-                  _path = 'assets/letters/';
-                  _img = 'space';
-                  _ext = '.png';
-                  _displaytext = 'Press the button and start speaking...';
-                  _state = 0;
-                }); },
+            () {
+              setState(() {
+                _text = '';
+                _path = 'assets/letters/';
+                _img = 'space';
+                _ext = '.png';
+                _displaytext = 'Press the button and start speaking...';
+                _state = 0;
+              });
+            },
           );
         },
       ),
-
-      floatingActionButtonLocation: CustomFloatingActionButtonLocation(offsetY: 40.0),
+      floatingActionButtonLocation:
+          CustomFloatingActionButtonLocation(offsetY: 40.0),
       floatingActionButton: AvatarGlow(
         animate: _isListening,
         glowColor: Theme.of(context).primaryColor,
@@ -185,9 +180,6 @@ class _SpeechScreenState extends State<SpeechScreen> {
           foregroundColor: Colors.white,
         ),
       ),
-
-
-
     );
   }
 
@@ -205,7 +197,6 @@ class _SpeechScreenState extends State<SpeechScreen> {
             _text = val.recognizedWords;
           }),
         );
-        
       }
     } else {
       setState(() => _isListening = false);
@@ -216,7 +207,6 @@ class _SpeechScreenState extends State<SpeechScreen> {
   }
 
   void translation(String _text) async {
-
     _displaytext = '';
     String speechStr = _text.toLowerCase();
 
@@ -236,7 +226,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
     //   await Future.delayed(const Duration(milliseconds: 11000));
     //   // return false;
     // } else {
-      List<String> strArray = speechStr.split(" ");
+    List<String> strArray = speechStr.split(" ");
     for (String content in strArray) {
       // print('$content');
       // if(utils.phrases.contains(content)){
@@ -254,10 +244,10 @@ class _SpeechScreenState extends State<SpeechScreen> {
       //   await Future.delayed(Duration(milliseconds: _duration));
       //
       // } else
-        if (utils.words.contains(content)){
+      if (utils.words.contains(content)) {
         String file = content;
         int idx = utils.words.indexOf(content);
-        int _duration = int.parse(utils.words.elementAt(idx+1));
+        int _duration = int.parse(utils.words.elementAt(idx + 1));
         // print('$_duration');
         setState(() {
           _state += 1;
@@ -269,10 +259,10 @@ class _SpeechScreenState extends State<SpeechScreen> {
         await Future.delayed(Duration(milliseconds: _duration));
       } else {
         String file = content;
-        if(utils.hello.contains(file)){
+        if (utils.hello.contains(file)) {
           file = 'hello';
           int idx = utils.words.indexOf(file);
-          int _duration = int.parse(utils.words.elementAt(idx+1));
+          int _duration = int.parse(utils.words.elementAt(idx + 1));
           // print('$_duration');
           setState(() {
             _state += 1;
@@ -282,11 +272,10 @@ class _SpeechScreenState extends State<SpeechScreen> {
             _ext = '.gif';
           });
           await Future.delayed(Duration(milliseconds: _duration));
-
-        } else if(utils.you.contains(file)) {
+        } else if (utils.you.contains(file)) {
           file = 'you';
           int idx = utils.words.indexOf(file);
-          int _duration = int.parse(utils.words.elementAt(idx+1));
+          int _duration = int.parse(utils.words.elementAt(idx + 1));
           // print('$_duration');
           setState(() {
             _state += 1;
@@ -296,9 +285,8 @@ class _SpeechScreenState extends State<SpeechScreen> {
             _ext = '.gif';
           });
           await Future.delayed(Duration(milliseconds: _duration));
-        }
-        else {
-          for (var i = 0; i < content.length; i++){
+        } else {
+          for (var i = 0; i < content.length; i++) {
             if (utils.letters.contains(content[i])) {
               String char = content[i];
               // print('$alphabet');
@@ -310,7 +298,6 @@ class _SpeechScreenState extends State<SpeechScreen> {
                 _ext = '.png';
               });
               await Future.delayed(const Duration(milliseconds: 1500));
-
             } else {
               String letter = content[i];
               // print('$letter');
@@ -322,7 +309,6 @@ class _SpeechScreenState extends State<SpeechScreen> {
                 _ext = '.png';
               });
               await Future.delayed(const Duration(milliseconds: 1000));
-
             }
           }
         }
@@ -336,35 +322,33 @@ class _SpeechScreenState extends State<SpeechScreen> {
         _ext = '.png';
       });
       await Future.delayed(const Duration(milliseconds: 1000));
-
     }
   }
-
 }
 
-List<String> filterKnownStr(String speechStr, List<String> islGif, List<String> finalArr) {
-
+List<String> filterKnownStr(
+    String speechStr, List<String> islGif, List<String> finalArr) {
   bool check = true;
 
   for (String known in islGif) {
     List<String> tmp;
-    if (speechStr.contains(known)){
+    if (speechStr.contains(known)) {
       check = false;
       tmp = speechStr.split(known);
       tmp[0] = tmp[0].trim();
       finalArr.addAll(tmp[0].split(' '));
       finalArr.add(known);
 
-      if (finalArr.isEmpty){
-        finalArr =  ['null'];
+      if (finalArr.isEmpty) {
+        finalArr = ['null'];
       }
       if (tmp.length == 1) {
         return finalArr;
       }
       tmp[1] = tmp[1].trim();
-      if (tmp[1] != ''){
+      if (tmp[1] != '') {
         return filterKnownStr(tmp[1], islGif, finalArr);
-      } else{
+      } else {
         return finalArr;
       }
     }
@@ -376,4 +360,3 @@ List<String> filterKnownStr(String speechStr, List<String> islGif, List<String> 
   }
   return [];
 }
-

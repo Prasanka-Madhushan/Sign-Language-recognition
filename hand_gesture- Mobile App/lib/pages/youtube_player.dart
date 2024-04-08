@@ -15,17 +15,50 @@ class YoutubeVideo {
 
 // Sample list of videos with added thumbnails
 List<YoutubeVideo> youtubeVideos = [
-  YoutubeVideo(title: "Sign Language for Beginners, 10 Tips to Start ASL", videoId: "xAQ9Pegg0gc", thumbnailUrl: "https://img.youtube.com/vi/xAQ9Pegg0gc/0.jpg"),
-  YoutubeVideo(title: "The Real Reason ASL Signs Differ Across People", videoId: "NVoeTUSUn5c", thumbnailUrl: "https://img.youtube.com/vi/NVoeTUSUn5c/0.jpg"),
-  YoutubeVideo(title: "25 ASL Signs You Need to Know, ASL Basics", videoId: "0FcwzMq4iWg", thumbnailUrl: "https://img.youtube.com/vi/0FcwzMq4iWg/0.jpg"),
-  YoutubeVideo(title: "50 Basic ASL Conversational Signs", videoId: "CGqXy3JOZRs", thumbnailUrl: "https://img.youtube.com/vi/CGqXy3JOZRs/0.jpg"),
-  YoutubeVideo(title: "Learn Sign Language", videoId: "DaMjr4AfYA0", thumbnailUrl: "https://img.youtube.com/vi/DaMjr4AfYA0/0.jpg"),
-  YoutubeVideo(title: "Common ASL Phrases and Signs You Must know", videoId: "IzOQ1H1_rd8", thumbnailUrl: "https://img.youtube.com/vi/IzOQ1H1_rd8/0.jpg"),
-  YoutubeVideo(title: "25 Easiest Signs to Remember in ASL", videoId: "Y6GOZu0qWaM", thumbnailUrl: "https://img.youtube.com/vi/Y6GOZu0qWaM/0.jpg"),
-  YoutubeVideo(title: "100 Basic Signs", videoId: "ianCxd71xIo", thumbnailUrl: "https://img.youtube.com/vi/ianCxd71xIo/0.jpg"),
-  YoutubeVideo(title: "Basic Sign Language for Caregivers of the Deaf/Hard of Hearing", videoId: "rkQZQhloXuE", thumbnailUrl: "https://img.youtube.com/vi/rkQZQhloXuE/0.jpg"),
-  YoutubeVideo(title: "Learn the ASL Alphabet Fast", videoId: "DBQINq0SsAw", thumbnailUrl: "https://img.youtube.com/vi/DBQINq0SsAw/0.jpg"),
-  YoutubeVideo(title: "30 Signs You Need to Know for Basic ASL Conversations", videoId: "_c--P6VRTUo", thumbnailUrl: "https://img.youtube.com/vi/_c--P6VRTUo/0.jpg"),
+  YoutubeVideo(
+      title: "Sign Language for Beginners, 10 Tips to Start ASL",
+      videoId: "xAQ9Pegg0gc",
+      thumbnailUrl: "https://img.youtube.com/vi/xAQ9Pegg0gc/0.jpg"),
+  YoutubeVideo(
+      title: "The Real Reason ASL Signs Differ Across People",
+      videoId: "NVoeTUSUn5c",
+      thumbnailUrl: "https://img.youtube.com/vi/NVoeTUSUn5c/0.jpg"),
+  YoutubeVideo(
+      title: "25 ASL Signs You Need to Know, ASL Basics",
+      videoId: "0FcwzMq4iWg",
+      thumbnailUrl: "https://img.youtube.com/vi/0FcwzMq4iWg/0.jpg"),
+  YoutubeVideo(
+      title: "50 Basic ASL Conversational Signs",
+      videoId: "CGqXy3JOZRs",
+      thumbnailUrl: "https://img.youtube.com/vi/CGqXy3JOZRs/0.jpg"),
+  YoutubeVideo(
+      title: "Learn Sign Language",
+      videoId: "DaMjr4AfYA0",
+      thumbnailUrl: "https://img.youtube.com/vi/DaMjr4AfYA0/0.jpg"),
+  YoutubeVideo(
+      title: "Common ASL Phrases and Signs You Must know",
+      videoId: "IzOQ1H1_rd8",
+      thumbnailUrl: "https://img.youtube.com/vi/IzOQ1H1_rd8/0.jpg"),
+  YoutubeVideo(
+      title: "25 Easiest Signs to Remember in ASL",
+      videoId: "Y6GOZu0qWaM",
+      thumbnailUrl: "https://img.youtube.com/vi/Y6GOZu0qWaM/0.jpg"),
+  YoutubeVideo(
+      title: "100 Basic Signs",
+      videoId: "ianCxd71xIo",
+      thumbnailUrl: "https://img.youtube.com/vi/ianCxd71xIo/0.jpg"),
+  YoutubeVideo(
+      title: "Basic Sign Language for Caregivers of the Deaf/Hard of Hearing",
+      videoId: "rkQZQhloXuE",
+      thumbnailUrl: "https://img.youtube.com/vi/rkQZQhloXuE/0.jpg"),
+  YoutubeVideo(
+      title: "Learn the ASL Alphabet Fast",
+      videoId: "DBQINq0SsAw",
+      thumbnailUrl: "https://img.youtube.com/vi/DBQINq0SsAw/0.jpg"),
+  YoutubeVideo(
+      title: "30 Signs You Need to Know for Basic ASL Conversations",
+      videoId: "_c--P6VRTUo",
+      thumbnailUrl: "https://img.youtube.com/vi/_c--P6VRTUo/0.jpg"),
 
   // Add more videos with their thumbnails
 ];
@@ -62,7 +95,8 @@ class YoutubeVideoListScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => YoutubePlayerScreen(videoId: videos[index].videoId),
+                      builder: (context) =>
+                          YoutubePlayerScreen(videoId: videos[index].videoId),
                     ),
                   );
                 },
@@ -72,7 +106,8 @@ class YoutubeVideoListScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black, // Adjusted text color for better readability
+                    color: Colors
+                        .black, // Adjusted text color for better readability
                   ),
                 ),
                 trailing: Icon(Icons.play_circle_fill, color: Colors.red),

@@ -9,8 +9,6 @@ import 'package:hand_gesture/pages/zeegocloud_home.dart';
 import 'aboutus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
-
 List<CameraDescription> cameras = [];
 
 class Dashboard extends StatelessWidget {
@@ -18,12 +16,42 @@ class Dashboard extends StatelessWidget {
   Dashboard({Key? key, required this.cameras}) : super(key: key);
 
   final List<Map<String, dynamic>> items = [
-    {"icon": Icons.camera_alt, "title": "Camera", "color": Colors.blue, "image": "images/bg2.jpg"},
-    {"icon": Icons.video_call, "title": "Video Call", "color": Colors.green, "image": "images/bg1.jpg"},
-    {"icon": Icons.chat, "title": "Chat", "color": Colors.orange, "image": "images/bg1.jpg"},
-    {"icon": Icons.translate, "title": "Translator", "color": Colors.red, "image": "images/bg2.jpg"},
-    {"icon": Icons.school, "title": "Learn Signs", "color": Colors.purple, "image": "images/bg2.jpg"},
-    {"icon": Icons.info, "title": "About Us", "color": Colors.teal, "image": "images/bg1.jpg"},
+    {
+      "icon": Icons.camera_alt,
+      "title": "Camera",
+      "color": Colors.blue,
+      "image": "images/bg2.jpg"
+    },
+    {
+      "icon": Icons.video_call,
+      "title": "Video Call",
+      "color": Colors.green,
+      "image": "images/bg1.jpg"
+    },
+    {
+      "icon": Icons.chat,
+      "title": "Chat",
+      "color": Colors.orange,
+      "image": "images/bg1.jpg"
+    },
+    {
+      "icon": Icons.translate,
+      "title": "Translator",
+      "color": Colors.red,
+      "image": "images/bg2.jpg"
+    },
+    {
+      "icon": Icons.school,
+      "title": "Learn Signs",
+      "color": Colors.purple,
+      "image": "images/bg2.jpg"
+    },
+    {
+      "icon": Icons.info,
+      "title": "About Us",
+      "color": Colors.teal,
+      "image": "images/bg1.jpg"
+    },
   ];
 
 //Dashboard Ui Design
@@ -40,10 +68,9 @@ class Dashboard extends StatelessWidget {
             letterSpacing: 2.0,
           ),
         ),
-        centerTitle: true, 
+        centerTitle: true,
         backgroundColor: Colors.indigo,
       ),
-
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -93,13 +120,15 @@ class Dashboard extends StatelessWidget {
             image: DecorationImage(
               image: AssetImage(items[index]['image']),
               fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.25), BlendMode.darken),
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.25), BlendMode.darken),
             ),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Icon(items[index]['icon'], size: 70, color: items[index]['color']),
+              Icon(items[index]['icon'],
+                  size: 70, color: items[index]['color']),
               SizedBox(height: 10),
               Text(
                 items[index]['title'],
@@ -115,58 +144,61 @@ class Dashboard extends StatelessWidget {
       ),
     );
   }
-  
+
   //Handling the Icons click events
   Future<void> onTapHandler(BuildContext context, String title) async {
     switch (title) {
       case "Camera":
         bool granted = await handleCameraPermission(context);
-        if(granted){
-         Navigator.of(context).pushReplacement(new MaterialPageRoute(
-        builder: (BuildContext context) => HomePage()));
+        if (granted) {
+          Navigator.of(context).pushReplacement(new MaterialPageRoute(
+              builder: (BuildContext context) => HomePage()));
         }
         break;
       case "Video Call":
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => HomeScreen(), 
+          builder: (context) => HomeScreen(),
         ));
         break;
       case "Chat":
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChatRoom()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => ChatRoom()));
         break;
       case "Translator":
-      
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => speechHome()));
-      break;
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => speechHome()));
+        break;
       case "About Us":
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutUsPage()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => AboutUsPage()));
         break;
       case "Learn Signs":
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => YoutubeVideoListScreen(videos: youtubeVideos))); // Ensure youtubeVideos is defined
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => YoutubeVideoListScreen(
+                videos: youtubeVideos))); // Ensure youtubeVideos is defined
         break;
-        
-      default:
-      // Handle other options with a generic dialog
-        showGenericDialog(context, "Item Details", "Details about the item tapped.");
-        break;
-      }
-  }
 
-Future<bool> handleCameraPermission(BuildContext context) async {
-  var cameraStatus = await Permission.camera.status;
-  if (!cameraStatus.isGranted) {
-    var result = await Permission.camera.request();
-    if (!result.isGranted) {
-      showPermissionDeniedDialog(context);
-      return false;
+      default:
+        // Handle other options with a generic dialog
+        showGenericDialog(
+            context, "Item Details", "Details about the item tapped.");
+        break;
     }
   }
-  return true;
-}
 
-  
+  Future<bool> handleCameraPermission(BuildContext context) async {
+    var cameraStatus = await Permission.camera.status;
+    if (!cameraStatus.isGranted) {
+      var result = await Permission.camera.request();
+      if (!result.isGranted) {
+        showPermissionDeniedDialog(context);
+        return false;
+      }
+    }
+    return true;
+  }
 
-Future<void> handleCameraTap(BuildContext context) async {
+  Future<void> handleCameraTap(BuildContext context) async {
     var cameraStatus = await Permission.camera.status;
     if (!cameraStatus.isGranted) {
       await Permission.camera.request();
@@ -192,8 +224,7 @@ Future<void> handleCameraTap(BuildContext context) async {
   }
 }
 
-void setState(Null Function() param0) {
-}                        
+void setState(Null Function() param0) {}
 
 void showGenericDialog(BuildContext context, String title, String content) {
   showDialog(
@@ -212,4 +243,3 @@ void showGenericDialog(BuildContext context, String title, String content) {
     },
   );
 }
-

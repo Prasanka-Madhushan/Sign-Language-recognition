@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white, 
+                  color: Colors.white,
                 ),
               ),
               SizedBox(height: 20),
@@ -32,11 +32,15 @@ class HomeScreen extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: "Call ID",
                   labelStyle: TextStyle(color: Colors.white70), // Label color
-                  enabledBorder: OutlineInputBorder( // Normal border
-                    borderSide: BorderSide(color: Colors.tealAccent[700]!, width: 2),
+                  enabledBorder: OutlineInputBorder(
+                    // Normal border
+                    borderSide:
+                        BorderSide(color: Colors.tealAccent[700]!, width: 2),
                   ),
-                  focusedBorder: OutlineInputBorder( // Focused border
-                    borderSide: BorderSide(color: Colors.tealAccent[400]!, width: 2),
+                  focusedBorder: OutlineInputBorder(
+                    // Focused border
+                    borderSide:
+                        BorderSide(color: Colors.tealAccent[400]!, width: 2),
                   ),
                   fillColor: Colors.white24,
                   filled: true, // Fill color
@@ -49,7 +53,9 @@ class HomeScreen extends StatelessWidget {
                   if (callIdController.text.isNotEmpty) {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => CallPage(callID: callIdController.text)),
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              CallPage(callID: callIdController.text)),
                     );
                   } else {
                     // Show snackbar if Call ID is empty
@@ -59,7 +65,8 @@ class HomeScreen extends StatelessWidget {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black, backgroundColor: Colors.tealAccent[400], // Text color
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.tealAccent[400], // Text color
                 ),
                 child: const Text('Join'),
               ),

@@ -25,7 +25,8 @@ class ChatService extends ChangeNotifier {
     // Construct chat room id from current user id and receiver id (sorted to ensure uniqueness)
     List<String> ids = [currentUserId, receiverId];
     ids.sort(); // Sort the ids
-    String chatRoomId = ids.join("_"); // Combine the ids into a single string to use as a chat room ID
+    String chatRoomId = ids.join(
+        "_"); // Combine the ids into a single string to use as a chat room ID
 
     // Add new message to database
     await _firestore

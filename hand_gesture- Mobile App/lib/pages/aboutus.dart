@@ -6,7 +6,7 @@ class AboutUsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('About Us'),
-        backgroundColor: Colors.deepPurple, 
+        backgroundColor: Colors.deepPurple,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -18,7 +18,7 @@ class AboutUsPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
-                    'images/about.png', 
+                    'images/about.png',
                     width: 200.0,
                     height: 180.0,
                     fit: BoxFit.cover,
@@ -31,7 +31,7 @@ class AboutUsPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple, 
+                  color: Colors.deepPurple,
                 ),
               ),
               SizedBox(height: 20),
@@ -40,17 +40,16 @@ class AboutUsPage extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  height: 1.5, 
+                  height: 1.5,
                 ),
               ),
               SizedBox(height: 20),
-             
               Text(
                 'Contact Us',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple, 
+                  color: Colors.deepPurple,
                 ),
               ),
               SizedBox(height: 10),
@@ -59,7 +58,7 @@ class AboutUsPage extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  height: 1.5, 
+                  height: 1.5,
                 ),
               ),
             ],

@@ -5,12 +5,12 @@ import 'package:hand_gesture/services/auth/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'pages/splash_screen.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     ChangeNotifierProvider(
-      create: (context)=> AuthService(),
+      create: (context) => AuthService(),
       child: const MyApp(),
     ),
   );
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(), 
+      home: SplashScreen(),
     );
   }
 }

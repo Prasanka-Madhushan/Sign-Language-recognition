@@ -7,7 +7,6 @@ import 'package:hand_gesture/pages/Dictionary.dart';
 import 'package:hand_gesture/pages/Profile.dart';
 import 'package:hand_gesture/pages/youtube_player.dart';
 import 'dashboard.dart';
- 
 
 class HomePage extends StatefulWidget {
   @override
@@ -27,8 +26,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onPageChanged(int index) {
-    setState(() {
-    });
+    setState(() {});
   }
 
   void _onIconTapped(int index) {
@@ -38,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody:true,
+      extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         backgroundColor: Colors.transparent,
@@ -65,9 +63,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-
 class HomeContent extends StatelessWidget {
-  
   final List<Map<String, String>> carouselItems = [
     {'image': 'images/sign2.jpg', 'text': 'Learn Sign Language'},
     {'image': 'images/sign3.jpg', 'text': 'Communicate Effectively'},
@@ -76,8 +72,8 @@ class HomeContent extends StatelessWidget {
 
   final List<Widget> pageList = [
     HomePage(),
-    Dashboard(cameras: cameras), 
-    ProfilePage(), 
+    Dashboard(cameras: cameras),
+    ProfilePage(),
   ];
 
   @override
@@ -96,20 +92,19 @@ class HomeContent extends StatelessWidget {
         ),
         centerTitle: true,
         backgroundColor: Colors.indigoAccent,
-        elevation: 6, 
+        elevation: 6,
         actions: [
           IconButton(
             icon: Icon(Icons.person_2_rounded),
             onPressed: () {
               Navigator.push(
-              context, 
-              MaterialPageRoute(builder: (context) => ProfilePage()),
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
               );
             },
           ),
         ],
       ),
-      
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -188,7 +183,8 @@ class HomeContent extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: GridView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(), // to disable GridView's scrolling
+                physics:
+                    NeverScrollableScrollPhysics(), // to disable GridView's scrolling
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 3 / 2,
@@ -212,26 +208,33 @@ class HomeContent extends StatelessWidget {
                         switch (index) {
                           case 0:
                             // Navigate to Interactive Lessons
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => YoutubeVideoListScreen(videos: youtubeVideos)));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => YoutubeVideoListScreen(
+                                    videos: youtubeVideos)));
                             break;
                           case 1:
                             // Navigate to Daily Challenge
                             Navigator.push(
-                            context, 
-                            MaterialPageRoute(builder: (context) => DailyChallengePage()),
-                          );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DailyChallengePage()),
+                            );
                             break;
                           case 2:
                             // Navigate to Dictionary
                             Navigator.push(
-                              context, 
-                              MaterialPageRoute(builder: (context) => SignLanguageDictionaryPage()));
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        SignLanguageDictionaryPage()));
                             break;
                           case 3:
                             // Navigate to Community Stories
-                            Navigator.push(context,
-                             MaterialPageRoute(builder: (context) => CommunityStoriesPage()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        CommunityStoriesPage()));
                             break;
                         }
                       },
@@ -247,10 +250,9 @@ class HomeContent extends StatelessWidget {
                   );
                 },
               ),
-
             ),
             SizedBox(height: 30),
-           /* ElevatedButton(
+            /* ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => Dashboard(cameras: cameras)));
               },

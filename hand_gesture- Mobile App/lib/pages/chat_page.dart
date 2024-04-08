@@ -58,18 +58,22 @@ class _ChatPageState extends State<ChatPage> {
 
   Widget _buildMessageList() {
     return StreamBuilder<QuerySnapshot>(
-      stream: _chatService.getMessages(widget.receiverUserID, _firebaseAuth.currentUser!.uid),
+      stream: _chatService.getMessages(
+          widget.receiverUserID, _firebaseAuth.currentUser!.uid),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator()); // Improved loading indicator
+          return const Center(
+              child: CircularProgressIndicator()); // Improved loading indicator
         }
 
         return ListView(
-          children: snapshot.data!.docs.map((document) => _buildMessageItem(document)).toList(),
+          children: snapshot.data!.docs
+              .map((document) => _buildMessageItem(document))
+              .toList(),
         );
       },
     );
@@ -105,7 +109,8 @@ class _ChatPageState extends State<ChatPage> {
                 border: InputBorder.none,
                 filled: true,
                 fillColor: Colors.grey[200], // Input field fill color
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               ),
               textInputAction: TextInputAction.send,
               onSubmitted: (value) => sendMessage(), // Send message on submit

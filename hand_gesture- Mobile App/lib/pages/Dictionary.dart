@@ -5,24 +5,28 @@ class SignLanguageEntry {
   final String definition;
   final String imageUrl;
 
-  SignLanguageEntry({required this.word, required this.definition, required this.imageUrl});
+  SignLanguageEntry(
+      {required this.word, required this.definition, required this.imageUrl});
 }
 
 class SignLanguageDictionaryPage extends StatefulWidget {
   @override
-  _SignLanguageDictionaryPageState createState() => _SignLanguageDictionaryPageState();
+  _SignLanguageDictionaryPageState createState() =>
+      _SignLanguageDictionaryPageState();
 }
 
-class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage> {
+class _SignLanguageDictionaryPageState
+    extends State<SignLanguageDictionaryPage> {
   final List<SignLanguageEntry> entries = [
     SignLanguageEntry(
       word: "Hello",
       definition: "A greeting used when meeting someone.",
-      imageUrl: "images/dict/hello.png", 
+      imageUrl: "images/dict/hello.png",
     ),
     SignLanguageEntry(
       word: "Thank You",
-      definition: "A polite expression used when acknowledging a gift, service, or compliment.",
+      definition:
+          "A polite expression used when acknowledging a gift, service, or compliment.",
       imageUrl: "images/dict/thankyou.png",
     ),
     SignLanguageEntry(
@@ -33,31 +37,34 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
     SignLanguageEntry(
       word: "Please",
       definition: "A polite expression used when asking for something.",
-      imageUrl: "images/dict/please.png", 
+      imageUrl: "images/dict/please.png",
     ),
     SignLanguageEntry(
       word: "Goodbye",
       definition: "A farewell used when parting.",
-      imageUrl: "images/dict/goodbye.png", 
+      imageUrl: "images/dict/goodbye.png",
     ),
     SignLanguageEntry(
       word: "Love",
       definition: "A strong feeling of affection.",
-      imageUrl: "images/dict/love.png", 
+      imageUrl: "images/dict/love.png",
     ),
     SignLanguageEntry(
       word: "Friend",
-      definition: "A person whom one knows and with whom one has a bond of mutual affection.",
-      imageUrl: "images/dict/friends.png", 
+      definition:
+          "A person whom one knows and with whom one has a bond of mutual affection.",
+      imageUrl: "images/dict/friends.png",
     ),
     SignLanguageEntry(
       word: "Family",
-      definition: "A group consisting of parents and children living together in a household.",
+      definition:
+          "A group consisting of parents and children living together in a household.",
       imageUrl: "images/dict/family.png",
     ),
     SignLanguageEntry(
       word: "Help",
-      definition: "To make it easier for (someone) to do something by offering one's services or resources.",
+      definition:
+          "To make it easier for (someone) to do something by offering one's services or resources.",
       imageUrl: "images/dict/help.png",
     ),
     SignLanguageEntry(
@@ -87,10 +94,11 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
     ),
     SignLanguageEntry(
       word: "Work",
-      definition: "Activity involving mental or physical effort done in order to achieve a purpose or result.",
+      definition:
+          "Activity involving mental or physical effort done in order to achieve a purpose or result.",
       imageUrl: "images/dict/work.png",
     ),
-];
+  ];
 
   // This will hold the filtered entries for display in the UI
   List<SignLanguageEntry> filteredEntries = [];
@@ -98,10 +106,10 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
   // This controller will control the text input for the search functionality
   final TextEditingController _searchController = TextEditingController();
 
-   @override
+  @override
   void initState() {
     super.initState();
-    // Initially, all entries are displayed
+
     filteredEntries = entries;
     _searchController.addListener(_filterEntries);
   }
@@ -167,18 +175,19 @@ class _SignLanguageDictionaryPageState extends State<SignLanguageDictionaryPage>
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: ListTile(
-                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                     leading: CircleAvatar(
                       radius: 25,
                       backgroundImage: AssetImage(entry.imageUrl),
                       backgroundColor: Colors.transparent,
                     ),
-                    title: Text(entry.word, style: TextStyle(fontWeight: FontWeight.bold)),
+                    title: Text(entry.word,
+                        style: TextStyle(fontWeight: FontWeight.bold)),
                     subtitle: Text(entry.definition),
-                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.deepPurple),
-                    onTap: () {
-                      
-                    },
+                    trailing:
+                        Icon(Icons.arrow_forward_ios, color: Colors.deepPurple),
+                    onTap: () {},
                   ),
                 );
               },

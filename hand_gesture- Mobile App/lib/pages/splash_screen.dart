@@ -6,7 +6,8 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
 
@@ -27,7 +28,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     _animationController.forward();
 
     Future.delayed(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => AuthGate()));
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (_) => AuthGate()));
     });
   }
 
@@ -58,12 +60,16 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             children: <Widget>[
               Opacity(
                 opacity: _animation.value,
-                child: Image.asset('assets/logo/Splash4.png', width: 500), // Replace with your asset
+                child: Image.asset('assets/logo/Splash4.png',
+                    width: 500), // Replace with your asset
               ),
               SizedBox(height: 20),
               Text(
                 'SignSavvy',
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: Colors.white),
+                style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
             ],
           ),
