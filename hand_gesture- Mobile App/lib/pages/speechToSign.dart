@@ -5,17 +5,17 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:hand_gesture/pages/utils.dart' as utils;
 
 class CustomFloatingActionButtonLocation extends FloatingActionButtonLocation {
-  final double offsetX; // Horizontal offset from the center
-  final double offsetY; // Vertical offset upwards from the bottom
+  final double offsetX;
+  final double offsetY; 
 
   CustomFloatingActionButtonLocation({this.offsetX = 0.0, this.offsetY = 0.0});
 
   @override
   Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
-    // Horizontal alignment (center)
+    
     final double centerX = (scaffoldGeometry.scaffoldSize.width / 2.0) -
         (scaffoldGeometry.floatingActionButtonSize.width / 2.0);
-    // Vertical alignment (upwards from bottom)
+    
     final double bottomHeight = scaffoldGeometry.scaffoldSize.height -
         scaffoldGeometry.floatingActionButtonSize.height -
         scaffoldGeometry.bottomSheetSize.height;
