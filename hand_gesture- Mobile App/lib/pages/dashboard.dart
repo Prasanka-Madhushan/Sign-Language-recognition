@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:hand_gesture/pages/camera.dart';
-import 'package:hand_gesture/pages/chat_room.dart';
-import 'package:hand_gesture/pages/speechHome.dart';
-import 'package:hand_gesture/pages/youtube_player.dart';
-import 'package:hand_gesture/pages/zeegocloud_home.dart';
-import 'aboutus.dart';
+import 'package:hand_gesture/pages/aboutus.dart'; // Ensure this is the correct import path
+import 'package:hand_gesture/pages/camera.dart'; // Ensure this is the correct import path
+import 'package:hand_gesture/pages/chat_room.dart'; // Ensure this is the correct import path
+import 'package:hand_gesture/pages/speechHome.dart'; // Ensure this is the correct import path
+import 'package:hand_gesture/pages/youtube_player.dart'; // Ensure this is the correct import path
+import 'package:hand_gesture/pages/zeegocloud_home.dart'; // Ensure this is the correct import path
+import 'package:camera/camera.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 List<CameraDescription> cameras = [];
@@ -16,78 +16,32 @@ class Dashboard extends StatelessWidget {
   Dashboard({Key? key, required this.cameras}) : super(key: key);
 
   final List<Map<String, dynamic>> items = [
-    {
-      "icon": Icons.camera_alt,
-      "title": "Camera",
-      "color": Colors.blue,
-      "image": "images/bg2.jpg"
-    },
-    {
-      "icon": Icons.video_call,
-      "title": "Video Call",
-      "color": Colors.green,
-      "image": "images/bg1.jpg"
-    },
-    {
-      "icon": Icons.chat,
-      "title": "Chat",
-      "color": Colors.orange,
-      "image": "images/bg1.jpg"
-    },
-    {
-      "icon": Icons.translate,
-      "title": "Translator",
-      "color": Colors.red,
-      "image": "images/bg2.jpg"
-    },
-    {
-      "icon": Icons.school,
-      "title": "Learn Signs",
-      "color": Colors.purple,
-      "image": "images/bg2.jpg"
-    },
-    {
-      "icon": Icons.info,
-      "title": "About Us",
-      "color": Colors.teal,
-      "image": "images/bg1.jpg"
-    },
+    {"icon": Icons.camera_alt, "title": "Camera", "color": Colors.blue, "image": "images/bg2.jpg"},
+    {"icon": Icons.video_call, "title": "Video Call", "color": Colors.green, "image": "images/bg1.jpg"},
+    {"icon": Icons.chat, "title": "Chat", "color": Colors.orange, "image": "images/bg1.jpg"},
+    {"icon": Icons.translate, "title": "Translator", "color": Colors.red, "image": "images/bg2.jpg"},
+    {"icon": Icons.school, "title": "Learn Signs", "color": Colors.purple, "image": "images/bg2.jpg"},
+    {"icon": Icons.info, "title": "About Us", "color": Colors.teal, "image": "images/bg1.jpg"},
   ];
 
+
 //Dashboard Ui Design
-  @override
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Dashboard",
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-            letterSpacing: 2.0,
-          ),
-        ),
+        title: Text("Dashboard", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: 2.0)),
         centerTitle: true,
         backgroundColor: Colors.indigo,
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [Colors.indigo, Colors.deepPurple.shade400],
-          ),
+          gradient: LinearGradient(begin: Alignment.topRight, end: Alignment.bottomLeft, colors: [Colors.indigo, Colors.deepPurple.shade400]),
         ),
         child: AnimationLimiter(
           child: GridView.builder(
             padding: EdgeInsets.all(20),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 1.0,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
-            ),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 1.0, crossAxisSpacing: 20, mainAxisSpacing: 20),
             itemCount: items.length,
             itemBuilder: (context, index) {
               return AnimationConfiguration.staggeredGrid(
@@ -108,43 +62,30 @@ class Dashboard extends StatelessWidget {
   }
 
   Widget buildCard(BuildContext context, int index) {
+    Map<String, dynamic> item = items[index];
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      elevation: 5,
+      elevation: 10,
       child: InkWell(
-        onTap: () => onTapHandler(context, items[index]['title']),
+        onTap: () => onTapHandler(context, item['title']),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: items[index]['color'].withOpacity(0.2),
-            image: DecorationImage(
-              image: AssetImage(items[index]['image']),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.25), BlendMode.darken),
-            ),
+            color: item['color'].withOpacity(0.2),
+            image: DecorationImage(image: AssetImage(item['image']), fit: BoxFit.cover, colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.25), BlendMode.darken)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Icon(items[index]['icon'],
-                  size: 70, color: items[index]['color']),
+              Icon(item['icon'], size: 70, color: item['color']),
               SizedBox(height: 10),
-              Text(
-                items[index]['title'],
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
+              Text(item['title'], style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
             ],
           ),
         ),
       ),
     );
   }
-
   //Handling the Icons click events
   Future<void> onTapHandler(BuildContext context, String title) async {
     switch (title) {
