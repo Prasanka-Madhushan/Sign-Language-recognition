@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:hand_gesture/WebRTC/VideoCallApp.dart';
 import 'package:hand_gesture/pages/aboutus.dart'; 
 import 'package:hand_gesture/pages/camera.dart'; 
 import 'package:hand_gesture/pages/chat_room.dart'; 
 import 'package:hand_gesture/pages/speechHome.dart';
 import 'package:hand_gesture/pages/youtube_player.dart'; 
 import 'package:hand_gesture/pages/zeegocloud_home.dart'; 
+//import 'package:hand_gesture/pages/video_translator.dart'; // Assuming you have this page
 import 'package:camera/camera.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -22,10 +24,9 @@ class Dashboard extends StatelessWidget {
     {"icon": Icons.translate, "title": "Translator", "color": Colors.red, "image": "images/bg2.jpg"},
     {"icon": Icons.school, "title": "Learn Signs", "color": Colors.purple, "image": "images/bg2.jpg"},
     {"icon": Icons.info, "title": "About Us", "color": Colors.teal, "image": "images/bg1.jpg"},
+    {"icon": Icons.video_camera_front_rounded, "title": "Video Translate", "color": Colors.indigo, "image": "images/bg1.jpg"},
   ];
 
-
-//Dashboard Ui Design
    @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,43 +87,35 @@ class Dashboard extends StatelessWidget {
       ),
     );
   }
-  //Handling the Icons click events
+  
   Future<void> onTapHandler(BuildContext context, String title) async {
     switch (title) {
       case "Camera":
         bool granted = await handleCameraPermission(context);
         if (granted) {
-          Navigator.of(context).pushReplacement(new MaterialPageRoute(
-              builder: (BuildContext context) => HomePage()));
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => HomePage()));
         }
         break;
       case "Video Call":
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        ));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
         break;
       case "Chat":
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => ChatRoom()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChatRoom()));
         break;
       case "Translator":
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => speechHome()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => speechHome()));
         break;
       case "About Us":
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => AboutUsPage()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutUsPage()));
         break;
       case "Learn Signs":
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => YoutubeVideoListScreen(
-                videos: youtubeVideos))); // Ensure youtubeVideos is defined
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => YoutubeVideoListScreen(videos: youtubeVideos))); // Ensure youtubeVideos is defined
         break;
-
+      case "Video Translate":
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => VideoCallApp())); // Update this line with correct page
+        break;
       default:
-        // Handle other options with a generic dialog
-        showGenericDialog(
-            context, "Item Details", "Details about the item tapped.");
+        showGenericDialog(context, "Item Details", "Details about the item tapped.");
         break;
     }
   }
@@ -137,13 +130,6 @@ class Dashboard extends StatelessWidget {
       }
     }
     return true;
-  }
-
-  Future<void> handleCameraTap(BuildContext context) async {
-    var cameraStatus = await Permission.camera.status;
-    if (!cameraStatus.isGranted) {
-      await Permission.camera.request();
-    }
   }
 
   void showPermissionDeniedDialog(BuildContext context) {
@@ -164,8 +150,6 @@ class Dashboard extends StatelessWidget {
     );
   }
 }
-
-void setState(Null Function() param0) {}
 
 void showGenericDialog(BuildContext context, String title, String content) {
   showDialog(
