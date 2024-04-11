@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:hand_gesture/pages/aboutus.dart'; // Ensure this is the correct import path
-import 'package:hand_gesture/pages/camera.dart'; // Ensure this is the correct import path
-import 'package:hand_gesture/pages/chat_room.dart'; // Ensure this is the correct import path
-import 'package:hand_gesture/pages/speechHome.dart'; // Ensure this is the correct import path
-import 'package:hand_gesture/pages/youtube_player.dart'; // Ensure this is the correct import path
-import 'package:hand_gesture/pages/zeegocloud_home.dart'; // Ensure this is the correct import path
+import 'package:hand_gesture/pages/aboutus.dart'; 
+import 'package:hand_gesture/pages/camera.dart'; 
+import 'package:hand_gesture/pages/chat_room.dart'; 
+import 'package:hand_gesture/pages/speechHome.dart';
+import 'package:hand_gesture/pages/youtube_player.dart'; 
+import 'package:hand_gesture/pages/zeegocloud_home.dart'; 
 import 'package:camera/camera.dart';
 import 'package:permission_handler/permission_handler.dart';
 
