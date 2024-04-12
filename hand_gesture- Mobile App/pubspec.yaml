@@ -54,6 +54,9 @@ dependencies:
   firebase_auth: ^4.17.9
   carousel_slider: ^4.2.1
   provider:
+  flutter_icons_null_safety: ^1.1.0
+  flutter_webrtc: ^0.10.3
+  socket_io_client: ^2.0.3+1
     
 
 

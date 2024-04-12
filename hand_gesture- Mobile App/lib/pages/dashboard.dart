@@ -7,7 +7,6 @@ import 'package:hand_gesture/pages/chat_room.dart';
 import 'package:hand_gesture/pages/speechHome.dart';
 import 'package:hand_gesture/pages/youtube_player.dart'; 
 import 'package:hand_gesture/pages/zeegocloud_home.dart'; 
-//import 'package:hand_gesture/pages/video_translator.dart'; // Assuming you have this page
 import 'package:camera/camera.dart';
 import 'package:permission_handler/permission_handler.dart';
 
