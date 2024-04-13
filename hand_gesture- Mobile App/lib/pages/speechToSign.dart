@@ -63,7 +63,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: new Image.asset("assets/logo/Splash2.png"),
+              icon: new Image.asset("assets/logo/savvy4.png"),
               onPressed: () {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => HomePage()));

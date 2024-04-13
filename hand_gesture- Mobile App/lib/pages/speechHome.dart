@@ -17,7 +17,7 @@ class speechHome extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: AnimatedSplashScreen(
-        splash: 'assets/logo/Splash4.png',
+        splash: 'assets/logo/savvy6.png',
         duration: 1000,
         nextScreen: const SpeechScreen(),
         splashTransition: SplashTransition.fadeTransition,

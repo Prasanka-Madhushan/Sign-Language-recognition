@@ -60,17 +60,17 @@ class _SplashScreenState extends State<SplashScreen>
             children: <Widget>[
               Opacity(
                 opacity: _animation.value,
-                child: Image.asset('assets/logo/Splash4.png',
+                child: Image.asset('assets/logo/savvy2.png',
                     width: 500), // Replace with your asset
               ),
               SizedBox(height: 20),
-              Text(
+            /*  Text(
                 'SignSavvy',
                 style: TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
-              ),
+              ), */
             ],
           ),
         ),
