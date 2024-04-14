@@ -41,11 +41,11 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[900], // Updated background color
+      backgroundColor: Colors.blueGrey[900],
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            // Allows for scrolling when the keyboard is visible
+            
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Form(
