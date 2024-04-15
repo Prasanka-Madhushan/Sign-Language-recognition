@@ -58,108 +58,93 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: FadeTransition(
-                opacity: _animation,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ClipPath(
-                      clipper: TopCurvedClipper(),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Colors.deepPurple[700]!, Colors.deepPurpleAccent[700]!],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.deepPurple.withOpacity(0.3),
-                              offset: Offset(0, 2),
-                              blurRadius: 8.0,
-                            ),
-                          ],
-                        ),
-                        width: double.infinity,
-                        height: 150,
-                        alignment: Alignment.center,
-                        child: Icon(
-                          Icons.account_circle,
-                          size: 80,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+             colors: [Colors.deepPurple.shade400,Colors.indigo],
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: FadeTransition(
+                  opacity: _animation,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipPath(
+                        clipper: TopCurvedClipper(),
+                        child: Container(
                           color: Colors.white,
+                          width: double.infinity,
+                          height: 130,
+                          alignment: Alignment.center,
+                          child: Icon(
+                            Icons.account_circle,
+                            size: 70,
+                            color: Colors.blueGrey.shade400,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 50),
-                    Text(
-                      "Welcome back, you've been missed",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.grey[850],
-                        fontWeight: FontWeight.bold,
-                        shadows: [
-                          Shadow(
-                            color: Colors.black.withOpacity(0.2),
-                            offset: Offset(0, 4),
-                            blurRadius: 8.0,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 25),
-                    MyTextField(
-                      controller: emailController,
-                      hintText: 'Email',
-                      obscureText: false,
-                    ),
-                    const SizedBox(height: 10),
-                    MyTextField(
-                      controller: passwordController,
-                      hintText: 'Password',
-                      obscureText: true,
-                    ),
-                    const SizedBox(height: 25),
-                    MyButton(onTap: signIn, text: "Sign In"),
-                    const SizedBox(height: 25),
-                    ClipPath(
-                      clipper: BottomCurvedClipper(),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Colors.deepPurpleAccent[400]!, Colors.deepPurple[700]!],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.deepPurple.withOpacity(0.3),
-                              offset: Offset(0, -2),
-                              blurRadius: 8.0,
-                            ),
-                          ],
+                      const SizedBox(height: 50),
+                      Text(
+                        "Welcome back, you've been missed",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
                         ),
-                        width: double.infinity,
-                        height: 80,
-                        alignment: Alignment.center,
-                        child: GestureDetector(
-                          onTap: widget.onTap,
-                          child: const Text(
-                            'Not a member? Register now',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                      ),
+                      const SizedBox(height: 50),
+                      SizedBox(
+                        height: 50,
+                        child: MyTextField(
+                          controller: emailController,
+                          hintText: 'Email',
+                          obscureText: false,
+                        ),
+                      ),
+                      const SizedBox(height: 25),
+                      SizedBox(
+                        height: 50,
+                        child: MyTextField(
+                          controller: passwordController,
+                          hintText: 'Password',
+                          obscureText: true,
+                        ),
+                      ),
+                      const SizedBox(height: 50),
+                      SizedBox(
+                        width: 150,
+                        child: MyButton(onTap: signIn, text: "Sign In"),
+                      ),
+                      const SizedBox(height: 50),
+                      ClipPath(
+                        clipper: BottomCurvedClipper(),
+                        child: Container(
+                          color: Colors.blueGrey.shade400,
+                          width: double.infinity,
+                          height: 80,
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                            onTap: widget.onTap,
+                            child: Text(
+                              'Not a member? Register now',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -169,6 +154,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
     );
   }
 }
+
 
 class TopCurvedClipper extends CustomClipper<Path> {
   @override
@@ -204,3 +190,5 @@ class BottomCurvedClipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
+
+// You'll need to update MyButton and MyTextField to reflect the design changes too.
