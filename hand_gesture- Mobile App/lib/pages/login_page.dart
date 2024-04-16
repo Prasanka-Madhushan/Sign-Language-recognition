@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-             colors: [Colors.deepPurple.shade400,Colors.indigo],
+            colors: [Colors.purple, Colors.deepOrange.shade300],
           ),
         ),
         child: SafeArea(
@@ -81,12 +81,12 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                         child: Container(
                           color: Colors.white,
                           width: double.infinity,
-                          height: 130,
+                          height: 150,
                           alignment: Alignment.center,
-                          child: Icon(
-                            Icons.account_circle,
-                            size: 70,
-                            color: Colors.blueGrey.shade400,
+                          child: Image.asset(
+                             'assets/logo/savvy7.png', // Replace with your image asset
+                            width: 120,
+                            height: 120,
                           ),
                         ),
                       ),
@@ -98,9 +98,16 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                           fontSize: 24,
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
+                          shadows: [
+                            Shadow(
+                              blurRadius: 10.0,
+                              color: Colors.white.withOpacity(0.40),
+                              offset: Offset(5.0, 5.0),
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 25),
                       SizedBox(
                         height: 50,
                         child: MyTextField(
@@ -118,31 +125,45 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                           obscureText: true,
                         ),
                       ),
-                      const SizedBox(height: 50),
-                      SizedBox(
-                        width: 150,
+                      const SizedBox(height: 25),
+                      Transform.scale(
+                        scale: 0.7,
                         child: MyButton(onTap: signIn, text: "Sign In"),
                       ),
-                      const SizedBox(height: 50),
-                      ClipPath(
-                        clipper: BottomCurvedClipper(),
-                        child: Container(
-                          color: Colors.blueGrey.shade400,
-                          width: double.infinity,
-                          height: 80,
-                          alignment: Alignment.center,
-                          child: GestureDetector(
-                            onTap: widget.onTap,
-                            child: Text(
-                              'Not a member? Register now',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                      const SizedBox(height: 12),
+                      GestureDetector(
+                        onTap: widget.onTap,
+                        child: RichText(
+                          text: TextSpan(
+                            text: 'Not a member? ',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
                             ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'Register now',
+                                style: TextStyle(
+                                  color: Colors.blue, 
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
+                      const SizedBox(height: 25),
+                      ClipPath(
+                        clipper: BottomCurvedClipper(),
+                        child: Container(
+                          color: Colors.white,
+                          width: double.infinity,
+                          height: 50,
+                          alignment: Alignment.center,
+                        ),
+                      ),
+                      
+                      const SizedBox(height: 10),
                     ],
                   ),
                 ),
@@ -154,7 +175,6 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
     );
   }
 }
-
 
 class TopCurvedClipper extends CustomClipper<Path> {
   @override
@@ -190,5 +210,3 @@ class BottomCurvedClipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
-
-// You'll need to update MyButton and MyTextField to reflect the design changes too.
