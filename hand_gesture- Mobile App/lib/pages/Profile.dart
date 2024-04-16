@@ -10,8 +10,7 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage>
-    with SingleTickerProviderStateMixin {
+class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStateMixin {
   final User? user = FirebaseAuth.instance.currentUser;
   final TextEditingController _bioController = TextEditingController();
   String _userBio = "Tap to edit bio...";
@@ -21,8 +20,7 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 1));
+    _controller = AnimationController(vsync: this, duration: Duration(seconds: 1));
     _opacity = Tween<double>(begin: 0.0, end: 1.0).animate(_controller!)
       ..addListener(() {
         setState(() {});
@@ -37,11 +35,10 @@ class _ProfilePageState extends State<ProfilePage>
     super.dispose();
   }
 
-  void _editBio() async {
-    // Show dialog to edit bio
-    return showDialog<void>(
+  void _editBio() {
+    showDialog<void>(
       context: context,
-      barrierDismissible: false, // User must tap button to dismiss the dialog
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Edit Bio'),
@@ -53,16 +50,16 @@ class _ProfilePageState extends State<ProfilePage>
             TextButton(
               child: Text('Cancel'),
               onPressed: () {
-                Navigator.of(context).pop(); // Dismiss the dialog
+                Navigator.of(context).pop();
               },
             ),
             TextButton(
               child: Text('Save'),
               onPressed: () {
                 setState(() {
-                  _userBio = _bioController.text; // Update bio with new text
+                  _userBio = _bioController.text;
                 });
-                Navigator.of(context).pop(); // Dismiss the dialog
+                Navigator.of(context).pop();
               },
             ),
           ],
@@ -71,16 +68,15 @@ class _ProfilePageState extends State<ProfilePage>
     );
   }
 
-  void signOut() async {
+  void _signOut() async {
     try {
       final authService = Provider.of<AuthService>(context, listen: false);
       await authService.signOut();
-      Navigator.of(context).pushReplacementNamed(
-          '/login'); // Assuming '/login' is your route to the login screen
+      Navigator.of(context).pushReplacementNamed('/login');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Please Sign in!"),
+          content: Text("Please Login!"),
         ),
       );
     }
@@ -88,8 +84,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   @override
   Widget build(BuildContext context) {
-    final String profileImagePlaceholder =
-        'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+    final String profileImagePlaceholder = 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
     final String userEmail = user?.email ?? 'N/A';
 
     return Scaffold(
@@ -108,8 +103,7 @@ class _ProfilePageState extends State<ProfilePage>
               SizedBox(height: 40),
               CircleAvatar(
                 radius: 60,
-                backgroundImage:
-                    NetworkImage(user?.photoURL ?? profileImagePlaceholder),
+                backgroundImage: NetworkImage(user?.photoURL ?? profileImagePlaceholder),
                 backgroundColor: Colors.transparent,
               ),
               SizedBox(height: 20),
@@ -139,6 +133,7 @@ class _ProfilePageState extends State<ProfilePage>
               SizedBox(height: 20),
               _buildTile(Icons.settings, 'Settings'),
               _buildTile(Icons.help_outline, 'Help & Feedback'),
+              _buildTile(Icons.logout_rounded, 'Logout', _signOut),
             ],
           ),
         ),
@@ -146,13 +141,11 @@ class _ProfilePageState extends State<ProfilePage>
     );
   }
 
-  Widget _buildTile(IconData icon, String title) {
+  Widget _buildTile(IconData icon, String title, [VoidCallback? onTap]) {
     return ListTile(
       leading: Icon(icon, color: Colors.white),
       title: Text(title, style: TextStyle(color: Colors.white)),
-      onTap: () {
-        // Navigate to respective pages (to be implemented)
-      },
+      onTap: onTap,
     );
   }
 }
