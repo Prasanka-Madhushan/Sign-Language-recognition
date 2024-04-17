@@ -12,10 +12,10 @@ void main() {
 class VideoCallApp extends StatelessWidget {
   VideoCallApp({super.key});
 
-  // signalling server url
-  final String websocketUrl = "WEB_SOCKET_SERVER_URL";
+  final String websocketUrl = const String.fromEnvironment(
+      'WEB_SOCKET_SERVER_URL',
+      defaultValue: 'http://192.168.8.117:5000');
 
-  // generate callerID of local user
   final String selfCallerID =
       Random().nextInt(999999).toString().padLeft(6, '0');
 

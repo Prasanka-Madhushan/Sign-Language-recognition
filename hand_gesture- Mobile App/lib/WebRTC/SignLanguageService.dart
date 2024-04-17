@@ -12,7 +12,10 @@ class SignLanguageService {
     var input = preprocessFrame(frame);
 
     // Adjust the type of 'output' based on your model's output specification
-    var output = List.filled(1, 0.0).reshape([1, 1]); // Example for a model that outputs a single floating-point value
+    var output = List.filled(1, 0.0).reshape([
+      1,
+      1
+    ]); // Example for a model that outputs a single floating-point value
 
     _interpreter.run(input, output);
 

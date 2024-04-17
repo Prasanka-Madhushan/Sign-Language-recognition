@@ -47,7 +47,7 @@ class _CallScreenState extends State<CallScreen> {
 
   @override
   void initState() {
-    // initializing renderers 
+    // initializing renderers
     _localRTCVideoRenderer.initialize();
     _remoteRTCVideoRenderer.initialize();
 
@@ -75,6 +75,16 @@ class _CallScreenState extends State<CallScreen> {
         }
       ]
     });
+
+    // Inside _setupPeerConnection method after creating the peer connection:
+    _rtcPeerConnection!.onTrack = (event) {
+      if (event.streams.isNotEmpty) {
+        // Check and attach the stream only if it's a video track
+        if (event.track.kind == 'video') {
+          _remoteRTCVideoRenderer.srcObject = event.streams.first;
+        }
+      }
+    };
 
     // listen for remotePeer mediaTrack event
     _rtcPeerConnection!.onTrack = (event) {
@@ -246,23 +256,25 @@ class _CallScreenState extends State<CallScreen> {
             ),
             // This Positioned widget is a placeholder for where you would display translation text.
             // Assume _translator provides a stream of translated text
-                  Positioned(
-                    top: 20,
-                    left: 20,
-                    child: StreamBuilder<String>(
-                      stream: _translator.translatedTextStream, // This needs to be implemented within your SignLanguageTranslator service
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Container(
-                            padding: EdgeInsets.all(8),
-                            color: Colors.black54,
-                            child: Text(snapshot.data!, style: TextStyle(color: Colors.white, fontSize: 24)),
-                          );
-                        }
-                        return SizedBox.shrink();
-                      },
-                    ),
-                  ),
+            Positioned(
+              top: 20,
+              left: 20,
+              child: StreamBuilder<String>(
+                stream: _translator
+                    .translatedTextStream, // This needs to be implemented within your SignLanguageTranslator service
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Container(
+                      padding: EdgeInsets.all(8),
+                      color: Colors.black54,
+                      child: Text(snapshot.data!,
+                          style: TextStyle(color: Colors.white, fontSize: 24)),
+                    );
+                  }
+                  return SizedBox.shrink();
+                },
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: Row(
@@ -304,21 +316,23 @@ class _CallScreenState extends State<CallScreen> {
   }
 }
 
-
 class SignLanguageTranslator {
   final SignLanguageService _signLanguageService = SignLanguageService();
-  final StreamController<String> _translationStreamController = StreamController<String>.broadcast();
+  final StreamController<String> _translationStreamController =
+      StreamController<String>.broadcast();
 
   SignLanguageTranslator() {
     _signLanguageService.loadModel();
   }
 
-  Stream<String> get translatedTextStream => _translationStreamController.stream;
+  Stream<String> get translatedTextStream =>
+      _translationStreamController.stream;
 
   // Placeholder for a method that captures frames and requests translation
   // This method should be called periodically or whenever a new frame is available
   Future<void> translateFrame(dynamic frame) async {
-    String translatedText = await _signLanguageService.translateFrameToText(frame);
+    String translatedText =
+        await _signLanguageService.translateFrameToText(frame);
     _translationStreamController.add(translatedText);
   }
 

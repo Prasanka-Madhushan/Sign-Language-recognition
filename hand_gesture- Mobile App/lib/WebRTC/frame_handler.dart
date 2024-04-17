@@ -1,9 +1,10 @@
 import 'dart:async';
-import 'dart:typed_data';
+//import 'dart:typed_data';
 import 'package:flutter/services.dart';
 
 class FrameHandler {
-  static const MethodChannel _channel = MethodChannel('com.example/videoframes');
+  static const MethodChannel _channel =
+      MethodChannel('com.example/videoframes');
 
   static void initialize() {
     _channel.setMethodCallHandler(_onMethodCall);
