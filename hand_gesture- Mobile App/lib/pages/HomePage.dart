@@ -44,9 +44,9 @@ class _HomePageState extends State<HomePage> {
         animationDuration: Duration(milliseconds: 300),
         height: 50,
         items: <Widget>[
-          Icon(Icons.home, size: 30, color: Colors.black),
-          Icon(Icons.dashboard, size: 30, color: Colors.black),
-          Icon(Icons.person, size: 30, color: Colors.black),
+          Icon(Icons.home_filled, size: 30, color: Colors.black),
+          Icon(Icons.space_dashboard_sharp, size: 30, color: Colors.black),
+          Icon(Icons.person_3, size: 30, color: Colors.black),
         ],
         onTap: _onIconTapped,
       ),
@@ -174,7 +174,17 @@ class HomeContent extends StatelessWidget {
             SizedBox(height: 30),
             Text(
               'Welcome to SignSavvy',
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                shadows: [
+                  Shadow(
+                    blurRadius: 10.0,
+                    color: Colors.white.withOpacity(0.40),
+                    offset: Offset(5.0, 5.0),
+                  ),
+                ],
+              ),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 30),
