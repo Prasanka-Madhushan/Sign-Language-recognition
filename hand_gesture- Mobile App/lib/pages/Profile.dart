@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
@@ -10,17 +11,20 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStateMixin {
+class _ProfilePageState extends State<ProfilePage>
+    with SingleTickerProviderStateMixin {
   final User? user = FirebaseAuth.instance.currentUser;
   final TextEditingController _bioController = TextEditingController();
   String _userBio = "Tap to edit bio...";
   AnimationController? _controller;
   Animation<double>? _opacity;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: Duration(seconds: 1));
+    _controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
     _opacity = Tween<double>(begin: 0.0, end: 1.0).animate(_controller!)
       ..addListener(() {
         setState(() {});
@@ -33,6 +37,18 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     _bioController.dispose();
     _controller?.dispose();
     super.dispose();
+  }
+
+  Future<String> _fetchUsername() async {
+    if (user == null) {
+      return 'No User';
+    }
+    try {
+      var userData = await _firestore.collection('users').doc(user?.uid).get();
+      return userData.data()?['username'] ?? 'No Username';
+    } catch (e) {
+      return 'Failed to fetch username';
+    }
   }
 
   void _editBio() {
@@ -84,8 +100,9 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    final String profileImagePlaceholder = 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
-    final String userEmail = user?.email ?? 'N/A';
+    final String profileImagePlaceholder =
+        'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+    //final String userEmail = user?.email ?? 'N/A';
 
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
@@ -103,16 +120,35 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
               SizedBox(height: 40),
               CircleAvatar(
                 radius: 60,
-                backgroundImage: NetworkImage(user?.photoURL ?? profileImagePlaceholder),
+                backgroundImage:
+                    NetworkImage(user?.photoURL ?? profileImagePlaceholder),
                 backgroundColor: Colors.transparent,
               ),
               SizedBox(height: 20),
-              Text(
+              /* Text(
                 userEmail,
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.white,
                 ),
+              ),*/
+              FutureBuilder<String>(
+                future: _fetchUsername(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<String> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading...",
+                        style: TextStyle(color: Colors.white));
+                  } else {
+                    return Text(
+                      snapshot.data!,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    );
+                  }
+                },
               ),
               SizedBox(height: 20),
               AnimatedOpacity(

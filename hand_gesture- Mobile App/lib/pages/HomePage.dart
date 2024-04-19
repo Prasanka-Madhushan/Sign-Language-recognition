@@ -1,5 +1,7 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:hand_gesture/pages/CommunityStories.dart';
 import 'package:hand_gesture/pages/DailyChallenge.dart';
@@ -75,6 +77,22 @@ class HomeContent extends StatelessWidget {
     Dashboard(cameras: cameras),
     ProfilePage(),
   ];
+
+  Future<String> _fetchUsername() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      try {
+        var userData = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .get();
+        return userData.data()?['username'] ?? 'No Username';
+      } catch (e) {
+        return 'Failed to fetch username';
+      }
+    }
+    return 'No User';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +191,7 @@ class HomeContent extends StatelessWidget {
             ),
             SizedBox(height: 30),
             Text(
-              'Welcome to SignSavvy',
+              'Welcome to SignSavvy,',
               style: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
@@ -186,6 +204,29 @@ class HomeContent extends StatelessWidget {
                 ],
               ),
               textAlign: TextAlign.center,
+            ),
+            FutureBuilder<String>(
+              future: _fetchUsername(),
+              builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else {
+                  return Text(
+                    snapshot.data!,
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 10.0,
+                          color: Colors.white.withOpacity(0.40),
+                          offset: Offset(5.0, 5.0),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
             ),
             SizedBox(height: 30),
             // Feature Grid Placeholder
