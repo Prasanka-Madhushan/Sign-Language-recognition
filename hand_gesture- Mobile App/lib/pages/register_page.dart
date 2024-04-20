@@ -13,10 +13,12 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderStateMixin {
+class _RegisterPageState extends State<RegisterPage>
+    with SingleTickerProviderStateMixin {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final usernameController = TextEditingController(); // Controller for username
 
   final _formKey = GlobalKey<FormState>();
   late AnimationController _animationController;
@@ -30,10 +32,8 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
     final authService = Provider.of<AuthService>(context, listen: false);
 
     try {
-      await authService.signUpWithEmailAndPassword(
-        emailController.text,
-        passwordController.text,
-      );
+      await authService.signUpWithEmailAndPassword(emailController.text,
+          passwordController.text, usernameController.text);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString())),
@@ -48,7 +48,8 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
       duration: const Duration(seconds: 2),
       vsync: this,
     );
-    _animation = CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
+    _animation =
+        CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
     _animationController.forward();
   }
 
@@ -58,6 +59,7 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
+    usernameController.dispose();
     super.dispose();
   }
 
@@ -69,7 +71,7 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Colors.deepOrange.shade300,Colors.purple],
+            colors: [Colors.deepOrange.shade300, Colors.purple],
           ),
         ),
         child: SafeArea(
@@ -102,20 +104,29 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
                         Text(
                           "Let's get you set up",
                           textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          shadows: [
-                            Shadow(
-                              blurRadius: 10.0,
-                              color: Colors.black.withOpacity(0.40),
-                              offset: Offset(5.0, 5.0),
-                            ),
-                          ],
-                        ),
+                          style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            shadows: [
+                              Shadow(
+                                blurRadius: 10.0,
+                                color: Colors.black.withOpacity(0.40),
+                                offset: Offset(5.0, 5.0),
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(height: 50),
+                        SizedBox(
+                          height: 50,
+                          child: MyTextField(
+                            controller: usernameController,
+                            hintText: 'User Name',
+                            obscureText: false,
+                          ),
+                        ),
+                        const SizedBox(height: 25),
                         SizedBox(
                           height: 50,
                           child: MyTextField(
@@ -148,47 +159,46 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
                           child: MyButton(onTap: signUp, text: "Sign Up"),
                         ),
                         const SizedBox(height: 12),
-                      GestureDetector(
-                        onTap: widget.onTap,
-                        child: RichText(
-                          text: TextSpan(
-                                  text: 'Already a member? ',
-                                  style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                            ),
-                            children: <TextSpan>[
-                              TextSpan(
-                                      text: 'Login now',
-                                      style: TextStyle(
-                                  color: Colors.blue, 
-                                  fontWeight: FontWeight.bold,
-                                ),
+                        GestureDetector(
+                          onTap: widget.onTap,
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'Already a member? ',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
                               ),
-                            ],
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'Login now',
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 25),
-                      ClipPath(
-                        clipper: BottomCurvedClipper(),
-                        child: Container(
-                          color: Colors.white,
-                          width: double.infinity,
-                          height: 50,
-                          alignment: Alignment.center,
+                        const SizedBox(height: 25),
+                        ClipPath(
+                          clipper: BottomCurvedClipper(),
+                          child: Container(
+                            color: Colors.white,
+                            width: double.infinity,
+                            height: 50,
+                            alignment: Alignment.center,
+                          ),
                         ),
-                      ),
-                      
-                      const SizedBox(height: 10),
-                    ],
+                        const SizedBox(height: 10),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
         ),
-      ),
       ),
     );
   }
@@ -201,7 +211,8 @@ class TopCurvedClipper extends CustomClipper<Path> {
     path.lineTo(0, size.height - 50);
     var controlPoint = Offset(size.width / 2, size.height);
     var endPoint = Offset(size.width, size.height - 50);
-    path.quadraticBezierTo(controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
+    path.quadraticBezierTo(
+        controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
     path.lineTo(size.width, 0);
     path.close();
     return path;
@@ -218,7 +229,8 @@ class BottomCurvedClipper extends CustomClipper<Path> {
     path.moveTo(0, 50);
     var controlPoint = Offset(size.width / 2, 0);
     var endPoint = Offset(size.width, 50);
-    path.quadraticBezierTo(controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
+    path.quadraticBezierTo(
+        controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
     path.close();
