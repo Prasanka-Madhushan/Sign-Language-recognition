@@ -1,3 +1,4 @@
+/*
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 class SignLanguageService {
@@ -36,6 +37,40 @@ class SignLanguageService {
     // Convert model output into a meaningful string
     // This might involve mapping numerical output to specific words or phrases
     return "Translated Sign"; // Placeholder text
+  }
+
+  void dispose() {
+    _interpreter.close();
+  }
+}
+*/
+
+import 'dart:async';
+import 'package:tflite_flutter/tflite_flutter.dart';
+
+class SignLanguageService {
+  late Interpreter _interpreter;
+
+  Future<void> loadModel() async {
+    _interpreter = await Interpreter.fromAsset("assets/model_unquant.tflite");
+  }
+
+  Future<String> translateFrameToText(dynamic frame) async {
+    var input = preprocessFrame(frame);
+    var output = List.filled(1, 0.0).reshape([1, 1]);
+    _interpreter.run(input, output);
+    String translatedText = postprocessOutput(output);
+    return translatedText;
+  }
+
+  dynamic preprocessFrame(dynamic frame) {
+    // Implement preprocessing based on your model's requirements
+    return frame;
+  }
+
+  String postprocessOutput(dynamic output) {
+    // Implement postprocessing based on your model's requirements
+    return "Translated Sign";
   }
 
   void dispose() {
