@@ -1,3 +1,4 @@
+/*
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -341,3 +342,118 @@ class SignLanguageTranslator {
     _translationStreamController.close();
   }
 }
+*/
+
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter_webrtc/flutter_webrtc.dart';
+import '../WebRTC/SignallingService.dart';
+
+class CallScreen extends StatefulWidget {
+  final String callerId, calleeId;
+  final dynamic offer;
+
+  const CallScreen({
+    super.key,
+    this.offer,
+    required this.callerId,
+    required this.calleeId,
+  });
+
+  @override
+  State<CallScreen> createState() => _CallScreenState();
+}
+
+class _CallScreenState extends State<CallScreen> {
+  final RTCVideoRenderer _localRTCVideoRenderer = RTCVideoRenderer();
+  final RTCVideoRenderer _remoteRTCVideoRenderer = RTCVideoRenderer();
+  MediaStream? _localStream;
+  RTCPeerConnection? _rtcPeerConnection;
+  final SignallingService _signallingService = SignallingService.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    initRenderers();
+    _setupPeerConnection();
+  }
+
+  Future<void> initRenderers() async {
+    await _localRTCVideoRenderer.initialize();
+    await _remoteRTCVideoRenderer.initialize();
+  }
+
+  Future<void> _setupPeerConnection() async {
+    var config = {
+      'iceServers': [
+        {'url': 'stun:stun.l.google.com:19302'}
+      ]
+    };
+    var constraints = {'mandatory': {}, 'optional': []};
+    _rtcPeerConnection = await createPeerConnection(config, constraints);
+
+    _rtcPeerConnection!.onTrack = (RTCTrackEvent event) {
+      if (event.track.kind == 'video') {
+        _remoteRTCVideoRenderer.srcObject = event.streams[0];
+      }
+    };
+
+    _localStream = await navigator.mediaDevices.getUserMedia({
+      'audio': true,
+      'video': {'facingMode': 'user'}
+    });
+
+    _localStream!.getTracks().forEach((track) {
+      _rtcPeerConnection!.addTrack(track, _localStream!);
+    });
+
+    _localRTCVideoRenderer.srcObject = _localStream;
+
+    if (widget.offer != null) {
+      await _rtcPeerConnection!.setRemoteDescription(
+        RTCSessionDescription(widget.offer['sdp'], widget.offer['type']),
+      );
+      RTCSessionDescription answer = await _rtcPeerConnection!.createAnswer();
+      await _rtcPeerConnection!.setLocalDescription(answer);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Video Call'),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: RTCVideoView(_remoteRTCVideoRenderer),
+          ),
+          Expanded(
+            child: RTCVideoView(_localRTCVideoRenderer, mirror: true),
+          ),
+          FloatingActionButton(
+            onPressed: _hangUp,
+            tooltip: 'Hangup',
+            child: Icon(Icons.call_end),
+          )
+        ],
+      ),
+    );
+  }
+
+  void _hangUp() {
+    _rtcPeerConnection!.close();
+    _localRTCVideoRenderer.dispose();
+    _remoteRTCVideoRenderer.dispose();
+    Navigator.pop(context);
+  }
+
+  @override
+  void dispose() {
+    _localRTCVideoRenderer.dispose();
+    _remoteRTCVideoRenderer.dispose();
+    super.dispose();
+  }
+}
+
