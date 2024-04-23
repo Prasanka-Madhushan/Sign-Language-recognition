@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hand_gesture/pages/settingpage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:hand_gesture/services/auth/auth_service.dart';
+import 'package:hand_gesture/pages/settingpage.dart';  // Ensure this import points to the correct file location of SettingsPage
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -91,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Please Login!"),
+          content: Text("Error signing out. Please try again."),
         ),
       );
     }
@@ -149,7 +149,9 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
               ),
               SizedBox(height: 20),
               _buildTile(Icons.settings, 'Settings', () => Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()))),
-              _buildTile(Icons.help_outline, 'Help & Feedback'),
+              _buildTile(Icons.help_outline, 'Help & Feedback', () {
+                // Optional: Add navigation or functionality for help and feedback
+              }),
               _buildTile(Icons.logout_rounded, 'Logout', _signOut),
             ],
           ),
