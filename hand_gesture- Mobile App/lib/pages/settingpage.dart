@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+//import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// Mock provider for theme settings
-class ThemeProvider extends ChangeNotifier {
-  bool _darkMode = false;
+// Mock provider for settings management
+class SettingsProvider extends ChangeNotifier {
+  bool _notificationsEnabled = true;
 
-  bool get darkMode => _darkMode;
+  bool get notificationsEnabled => _notificationsEnabled;
 
-  set darkMode(bool value) {
-    _darkMode = value;
+  set notificationsEnabled(bool value) {
+    _notificationsEnabled = value;
     notifyListeners();
   }
 
   // Call this method on app startup
   Future<void> loadPreferences() async {
     final prefs = await SharedPreferences.getInstance();
-    _darkMode = prefs.getBool('darkMode') ?? false;
+    _notificationsEnabled = prefs.getBool('notificationsEnabled') ?? true;
     notifyListeners();
   }
 
-  // Toggle the theme mode
-  Future<void> toggleDarkMode() async {
+  // Toggle notification settings
+  Future<void> toggleNotifications() async {
     final prefs = await SharedPreferences.getInstance();
-    _darkMode = !_darkMode;
-    await prefs.setBool('darkMode', _darkMode);
+    _notificationsEnabled = !_notificationsEnabled;
+    await prefs.setBool('notificationsEnabled', _notificationsEnabled);
     notifyListeners();
   }
 }
@@ -39,32 +39,31 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    var themeProvider = Provider.of<ThemeProvider>(context);
+    //var settingsProvider = Provider.of<SettingsProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
-        backgroundColor: themeProvider.darkMode ? Colors.grey[850] : Colors.blue,
       ),
       body: ListView(
         children: <Widget>[
-          SwitchListTile(
-            title: Text('Dark Mode'),
-            value: themeProvider.darkMode,
+          /*SwitchListTile(
+            title: Text('Enable Notifications'),
+            value: settingsProvider.notificationsEnabled,
             onChanged: (bool value) {
-              themeProvider.toggleDarkMode();
+              settingsProvider.toggleNotifications();
+            },
+          ),*/
+          ListTile(
+            title: Text('Manage Account'),
+            onTap: () {
+              // Navigation to Account Management Page or Dialog
             },
           ),
           ListTile(
-            title: Text('Manage Notifications'),
+            title: Text('Privacy Policy'),
             onTap: () {
-              // Navigation to Notification Settings Page or Dialog
-            },
-          ),
-          ListTile(
-            title: Text('Account Privacy'),
-            onTap: () {
-              // Navigation to Privacy Settings Page or Dialog
+              // Show privacy policy dialog or navigate to a web view
             },
           ),
           ListTile(
