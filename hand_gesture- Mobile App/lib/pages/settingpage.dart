@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hand_gesture/services/auth/auth_service.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Simplified settings management
@@ -35,6 +37,23 @@ class _SettingsPageState extends State<SettingsPage> {
         notificationsEnabled = enabled;
       });
     });
+  }
+
+  Future<void> _signOut() async {
+    try {
+      final authService = Provider.of<AuthService>(context, listen: false);
+      await authService.signOut();
+      // Clear any user data or session information
+      //await SharedPreferences.getInstance().clear();
+      // Navigate to the login screen
+      Navigator.of(context).pushReplacementNamed('/login');
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error signing out. Please try again."),
+        ),
+      );
+    }
   }
 
   @override
@@ -98,7 +117,7 @@ class _SettingsPageState extends State<SettingsPage> {
               title: Text('Logout'),
               onTap: () {
                 // Implement logout functionality
-                Navigator.of(context).pop(); 
+                _signOut();
               },
             ),
           ],
