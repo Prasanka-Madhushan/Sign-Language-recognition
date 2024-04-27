@@ -15,7 +15,7 @@ List<CameraDescription> cameras = [];
 class Dashboard extends StatelessWidget {
   final List<CameraDescription> cameras;
   Dashboard({Key? key, required this.cameras}) : super(key: key);
-
+//Icons in the dashboard
   final List<Map<String, dynamic>> items = [
     {
       "icon": Icons.camera_alt,
@@ -60,7 +60,7 @@ class Dashboard extends StatelessWidget {
       "image": "images/bg1.jpg"
     },
   ];
-
+//Dashboard UI design
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,7 +141,7 @@ class Dashboard extends StatelessWidget {
       ),
     );
   }
-
+//Handling the functions of the dashboard
   Future<void> onTapHandler(BuildContext context, String title) async {
     switch (title) {
       case "Camera":
@@ -170,12 +170,12 @@ class Dashboard extends StatelessWidget {
       case "Learn Signs":
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => YoutubeVideoListScreen(
-                videos: youtubeVideos))); // Ensure youtubeVideos is defined
+                videos: youtubeVideos))); 
         break;
       case "Video Translate":
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) =>
-                VideoCallApp())); // Update this line with correct page
+                VideoCallApp())); 
         break;
       default:
         showGenericDialog(

@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:hand_gesture/services/auth/auth_service.dart';
-import 'package:hand_gesture/pages/settingpage.dart';  // Ensure this import points to the correct file location of SettingsPage
+import 'package:hand_gesture/pages/settingpage.dart'; 
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -49,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       return 'Failed to fetch username';
     }
   }
-
+//Description adding function
   void _editBio() {
     showDialog<void>(
       context: context,
@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       },
     );
   }
-
+//Logout function
   void _signOut() async {
     try {
       final authService = Provider.of<AuthService>(context, listen: false);
@@ -96,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       );
     }
   }
-
+//Page UI design
   @override
   Widget build(BuildContext context) {
     final String profileImagePlaceholder = 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';

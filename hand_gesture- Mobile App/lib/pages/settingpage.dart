@@ -3,7 +3,7 @@ import 'package:hand_gesture/services/auth/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// Simplified settings management
+
 class SettingsProvider {
   bool _notificationsEnabled = true;
 
@@ -116,7 +116,6 @@ class _SettingsPageState extends State<SettingsPage> {
             ListTile(
               title: Text('Logout'),
               onTap: () {
-                // Implement logout functionality
                 _signOut();
               },
             ),
