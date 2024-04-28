@@ -18,9 +18,9 @@ class AboutUsPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
-                    'images/about.png',
-                    width: 200.0,
-                    height: 180.0,
+                    'assets/logo/savvy7.png',
+                    width: 250.0,
+                    height: 170.0,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -36,7 +36,11 @@ class AboutUsPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Text(
-                'This is the About Us page of this application. Here, you can gain insights into the application\'s purpose, its developers, and how it can benefit you. Our mission is to provide users with a seamless and intuitive experience, helping them achieve their goals effectively.',
+                'Welcome to SignSavvy, your bridge to seamless communication across barriers.'
+                'Born from the desire to foster inclusivity, our app translates sign language into text and spoken words into written form with precision and ease. '
+                'We are committed to breaking down the communication barriers that divide us, making interaction possible for everyone, regardless of their mode of communication.'
+                'Beyond these core functionalities, SignSavvy offers a suite of features designed to enrich your interactions and make every connection a rewarding experience.'
+                'Join us in embracing a world where everyone is heard and understood.',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -54,7 +58,7 @@ class AboutUsPage extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                'Email: prasankamadushan0@gmail.com\nWebsite: www.prasa.com\nMobile: 0764800929',
+                'Email: SignSavvy99@gmail.com\nWebsite: www.SignSavvy.com\nMobile: 0764800929',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
