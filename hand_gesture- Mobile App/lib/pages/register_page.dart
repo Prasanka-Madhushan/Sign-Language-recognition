@@ -18,7 +18,7 @@ class _RegisterPageState extends State<RegisterPage>
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  final usernameController = TextEditingController(); // Controller for username
+  final usernameController = TextEditingController(); 
 
   final _formKey = GlobalKey<FormState>();
   late AnimationController _animationController;

@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                           height: 150,
                           alignment: Alignment.center,
                           child: Image.asset(
-                             'assets/logo/savvy7.png', // Replace with your image asset
+                             'assets/logo/savvy7.png', 
                             width: 120,
                             height: 120,
                           ),

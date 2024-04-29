@@ -235,16 +235,16 @@ class HomeContent extends StatelessWidget {
               child: GridView.builder(
                 shrinkWrap: true,
                 physics:
-                    NeverScrollableScrollPhysics(), // to disable GridView's scrolling
+                    NeverScrollableScrollPhysics(), 
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 3 / 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
-                itemCount: 4, // Assuming 4 features for illustration
+                itemCount: 4, 
                 itemBuilder: (context, index) {
-                  // Feature names and icons (assuming you have icons for each)
+                  // Feature names and icons
                   final features = [
                     {'name': 'Interactive Lessons', 'icon': Icons.school},
                     {'name': 'Daily Challenge', 'icon': Icons.lightbulb},
@@ -255,7 +255,6 @@ class HomeContent extends StatelessWidget {
                     elevation: 5,
                     child: InkWell(
                       onTap: () {
-                        // Handle tap here, navigate to different pages based on index
                         switch (index) {
                           case 0:
                             // Navigate to Interactive Lessons
