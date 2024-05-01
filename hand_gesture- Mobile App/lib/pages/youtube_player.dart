@@ -4,16 +4,16 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class YoutubeVideo {
   final String title;
   final String videoId;
-  final String thumbnailUrl; // Added thumbnail URL
+  final String thumbnailUrl; 
 
   YoutubeVideo({
     required this.title,
     required this.videoId,
-    required this.thumbnailUrl, // Initialize thumbnail URL
+    required this.thumbnailUrl, 
   });
 }
 
-// Sample list of videos with added thumbnails
+// List of videos with added thumbnails
 List<YoutubeVideo> youtubeVideos = [
   YoutubeVideo(
       title: "Sign Language for Beginners, 10 Tips to Start ASL",
@@ -60,7 +60,7 @@ List<YoutubeVideo> youtubeVideos = [
       videoId: "_c--P6VRTUo",
       thumbnailUrl: "https://img.youtube.com/vi/_c--P6VRTUo/0.jpg"),
 
-  // Add more videos with their thumbnails
+  
 ];
 
 class YoutubeVideoListScreen extends StatelessWidget {
@@ -89,7 +89,7 @@ class YoutubeVideoListScreen extends StatelessWidget {
             return Card(
               elevation: 5,
               margin: EdgeInsets.all(8),
-              color: Colors.white, // Added white background for cards
+              color: Colors.white, 
               child: ListTile(
                 onTap: () {
                   Navigator.push(
@@ -107,7 +107,7 @@ class YoutubeVideoListScreen extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors
-                        .black, // Adjusted text color for better readability
+                        .black, 
                   ),
                 ),
                 trailing: Icon(Icons.play_circle_fill, color: Colors.red),

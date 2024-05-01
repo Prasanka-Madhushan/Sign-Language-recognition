@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen>
               Opacity(
                 opacity: _animation.value,
                 child: Image.asset('assets/logo/savvy2.png',
-                    width: 500), // Replace with your asset
+                    width: 500),
               ),
               SizedBox(height: 20),
             /*  Text(
