@@ -6,7 +6,7 @@ import 'package:page_transition/page_transition.dart';
 class speechHome extends StatelessWidget {
   const speechHome({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

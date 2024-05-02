@@ -26,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage>
 
   void signUp() async {
     if (!_formKey.currentState!.validate()) {
-      return; // If form is not valid, stop the sign-up process.
+      return; 
     }
     // Proceed with the authentication
     final authService = Provider.of<AuthService>(context, listen: false);
@@ -94,7 +94,7 @@ class _RegisterPageState extends State<RegisterPage>
                             height: 150,
                             alignment: Alignment.center,
                             child: Image.asset(
-                              'assets/logo/savvy7.png', // Replace with your image asset
+                              'assets/logo/savvy7.png', 
                               width: 120,
                               height: 120,
                             ),

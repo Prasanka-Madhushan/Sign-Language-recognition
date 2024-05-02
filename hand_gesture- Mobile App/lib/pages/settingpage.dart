@@ -45,7 +45,6 @@ class _SettingsPageState extends State<SettingsPage> {
       await authService.signOut();
       // Clear any user data or session information
       //await SharedPreferences.getInstance().clear();
-      // Navigate to the login screen
       Navigator.of(context).pushReplacementNamed('/login');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
