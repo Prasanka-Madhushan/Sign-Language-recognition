@@ -13,7 +13,8 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   late AnimationController _animationController;
@@ -26,7 +27,8 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-    _animation = CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
+    _animation =
+        CurvedAnimation(parent: _animationController, curve: Curves.easeIn);
     _animationController.forward();
   }
 
@@ -84,7 +86,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                           height: 150,
                           alignment: Alignment.center,
                           child: Image.asset(
-                             'assets/logo/savvy7.png', 
+                            'assets/logo/savvy7.png',
                             width: 120,
                             height: 120,
                           ),
@@ -144,7 +146,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                               TextSpan(
                                 text: 'Register now',
                                 style: TextStyle(
-                                  color: Colors.blue, 
+                                  color: Colors.blue,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -162,7 +164,6 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                           alignment: Alignment.center,
                         ),
                       ),
-                      
                       const SizedBox(height: 10),
                     ],
                   ),
@@ -183,7 +184,8 @@ class TopCurvedClipper extends CustomClipper<Path> {
     path.lineTo(0, size.height - 50);
     var controlPoint = Offset(size.width / 2, size.height);
     var endPoint = Offset(size.width, size.height - 50);
-    path.quadraticBezierTo(controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
+    path.quadraticBezierTo(
+        controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
     path.lineTo(size.width, 0);
     path.close();
     return path;
@@ -200,7 +202,8 @@ class BottomCurvedClipper extends CustomClipper<Path> {
     path.moveTo(0, 50);
     var controlPoint = Offset(size.width / 2, 0);
     var endPoint = Offset(size.width, 50);
-    path.quadraticBezierTo(controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
+    path.quadraticBezierTo(
+        controlPoint.dx, controlPoint.dy, endPoint.dx, endPoint.dy);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
     path.close();

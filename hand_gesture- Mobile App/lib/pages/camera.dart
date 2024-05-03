@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
       });
     });
   }
+
 //Tflite model
   Future<void> loadModel() async {
     await Tflite.loadModel(
@@ -50,7 +51,8 @@ class _HomePageState extends State<HomePage> {
     await flutterTts.setSpeechRate(0.5);
     await flutterTts.speak(text);
   }
-//Camera UI 
+
+//Camera UI
   @override
   Widget build(BuildContext context) {
     return Scaffold(

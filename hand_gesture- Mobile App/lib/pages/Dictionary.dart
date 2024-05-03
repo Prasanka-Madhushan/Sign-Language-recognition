@@ -135,6 +135,7 @@ class _SignLanguageDictionaryPageState
       });
     }
   }
+
 //UI Design
   @override
   Widget build(BuildContext context) {

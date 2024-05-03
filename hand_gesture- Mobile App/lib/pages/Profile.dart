@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:hand_gesture/services/auth/auth_service.dart';
-import 'package:hand_gesture/pages/settingpage.dart'; 
+import 'package:hand_gesture/pages/settingpage.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -12,7 +12,8 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStateMixin {
+class _ProfilePageState extends State<ProfilePage>
+    with SingleTickerProviderStateMixin {
   final User? user = FirebaseAuth.instance.currentUser;
   final TextEditingController _bioController = TextEditingController();
   String _userBio = "Tap to edit bio...";
@@ -23,7 +24,8 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: Duration(seconds: 1));
+    _controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
     _opacity = Tween<double>(begin: 0.0, end: 1.0).animate(_controller!)
       ..addListener(() {
         setState(() {});
@@ -49,6 +51,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       return 'Failed to fetch username';
     }
   }
+
 //Description adding function
   void _editBio() {
     showDialog<void>(
@@ -82,6 +85,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       },
     );
   }
+
 //Logout function
   void _signOut() async {
     try {
@@ -96,10 +100,12 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       );
     }
   }
+
 //Page UI design
   @override
   Widget build(BuildContext context) {
-    final String profileImagePlaceholder = 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+    final String profileImagePlaceholder =
+        'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
 
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
@@ -117,17 +123,21 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
               SizedBox(height: 40),
               CircleAvatar(
                 radius: 60,
-                backgroundImage: NetworkImage(user?.photoURL ?? profileImagePlaceholder),
+                backgroundImage:
+                    NetworkImage(user?.photoURL ?? profileImagePlaceholder),
                 backgroundColor: Colors.transparent,
               ),
               SizedBox(height: 20),
               FutureBuilder<String>(
                 future: _fetchUsername(),
-                builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                builder:
+                    (BuildContext context, AsyncSnapshot<String> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Text("Loading...", style: TextStyle(color: Colors.white));
+                    return Text("Loading...",
+                        style: TextStyle(color: Colors.white));
                   } else {
-                    return Text(snapshot.data!, style: TextStyle(fontSize: 16, color: Colors.white));
+                    return Text(snapshot.data!,
+                        style: TextStyle(fontSize: 16, color: Colors.white));
                   }
                 },
               ),
@@ -148,7 +158,11 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                 ),
               ),
               SizedBox(height: 20),
-              _buildTile(Icons.settings, 'Settings', () => Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()))),
+              _buildTile(
+                  Icons.settings,
+                  'Settings',
+                  () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SettingsPage()))),
               _buildTile(Icons.help_outline, 'Help & Feedback', () {
                 // Optional: Add navigation or functionality for help and feedback
               }),

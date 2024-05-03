@@ -3,7 +3,6 @@ import 'package:hand_gesture/services/auth/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class SettingsProvider {
   bool _notificationsEnabled = true;
 

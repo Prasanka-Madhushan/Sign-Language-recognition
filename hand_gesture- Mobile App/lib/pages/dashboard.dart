@@ -141,6 +141,7 @@ class Dashboard extends StatelessWidget {
       ),
     );
   }
+
 //Handling the functions of the dashboard
   Future<void> onTapHandler(BuildContext context, String title) async {
     switch (title) {
@@ -169,13 +170,12 @@ class Dashboard extends StatelessWidget {
         break;
       case "Learn Signs":
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => YoutubeVideoListScreen(
-                videos: youtubeVideos))); 
+            builder: (context) =>
+                YoutubeVideoListScreen(videos: youtubeVideos)));
         break;
       case "Video Translate":
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                VideoCallApp())); 
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => VideoCallApp()));
         break;
       default:
         showGenericDialog(

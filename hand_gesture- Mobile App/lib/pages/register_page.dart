@@ -18,7 +18,7 @@ class _RegisterPageState extends State<RegisterPage>
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  final usernameController = TextEditingController(); 
+  final usernameController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   late AnimationController _animationController;
@@ -26,7 +26,7 @@ class _RegisterPageState extends State<RegisterPage>
 
   void signUp() async {
     if (!_formKey.currentState!.validate()) {
-      return; 
+      return;
     }
     // Proceed with the authentication
     final authService = Provider.of<AuthService>(context, listen: false);
@@ -94,7 +94,7 @@ class _RegisterPageState extends State<RegisterPage>
                             height: 150,
                             alignment: Alignment.center,
                             child: Image.asset(
-                              'assets/logo/savvy7.png', 
+                              'assets/logo/savvy7.png',
                               width: 120,
                               height: 120,
                             ),

@@ -4,12 +4,12 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class YoutubeVideo {
   final String title;
   final String videoId;
-  final String thumbnailUrl; 
+  final String thumbnailUrl;
 
   YoutubeVideo({
     required this.title,
     required this.videoId,
-    required this.thumbnailUrl, 
+    required this.thumbnailUrl,
   });
 }
 
@@ -59,8 +59,6 @@ List<YoutubeVideo> youtubeVideos = [
       title: "30 Signs You Need to Know for Basic ASL Conversations",
       videoId: "_c--P6VRTUo",
       thumbnailUrl: "https://img.youtube.com/vi/_c--P6VRTUo/0.jpg"),
-
-  
 ];
 
 class YoutubeVideoListScreen extends StatelessWidget {
@@ -89,7 +87,7 @@ class YoutubeVideoListScreen extends StatelessWidget {
             return Card(
               elevation: 5,
               margin: EdgeInsets.all(8),
-              color: Colors.white, 
+              color: Colors.white,
               child: ListTile(
                 onTap: () {
                   Navigator.push(
@@ -106,8 +104,7 @@ class YoutubeVideoListScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors
-                        .black, 
+                    color: Colors.black,
                   ),
                 ),
                 trailing: Icon(Icons.play_circle_fill, color: Colors.red),

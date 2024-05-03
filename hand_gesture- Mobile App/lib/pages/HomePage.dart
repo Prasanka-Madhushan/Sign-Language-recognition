@@ -234,15 +234,14 @@ class HomeContent extends StatelessWidget {
               padding: EdgeInsets.all(10),
               child: GridView.builder(
                 shrinkWrap: true,
-                physics:
-                    NeverScrollableScrollPhysics(), 
+                physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 3 / 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
-                itemCount: 4, 
+                itemCount: 4,
                 itemBuilder: (context, index) {
                   // Feature names and icons
                   final features = [

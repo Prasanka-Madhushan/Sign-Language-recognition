@@ -6,16 +6,15 @@ import 'package:hand_gesture/pages/utils.dart' as utils;
 
 class CustomFloatingActionButtonLocation extends FloatingActionButtonLocation {
   final double offsetX;
-  final double offsetY; 
+  final double offsetY;
 
   CustomFloatingActionButtonLocation({this.offsetX = 0.0, this.offsetY = 0.0});
 
   @override
   Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
-    
     final double centerX = (scaffoldGeometry.scaffoldSize.width / 2.0) -
         (scaffoldGeometry.floatingActionButtonSize.width / 2.0);
-    
+
     final double bottomHeight = scaffoldGeometry.scaffoldSize.height -
         scaffoldGeometry.floatingActionButtonSize.height -
         scaffoldGeometry.bottomSheetSize.height;
