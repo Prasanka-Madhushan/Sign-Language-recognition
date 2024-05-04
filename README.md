@@ -33,19 +33,6 @@ Access educational materials and tutorials to enhance your sign language skills.
 ### Prerequisites
 Before you start, ensure your device runs Android or iOS with the latest operating system. Also, ensure a stable internet connection for optimal app performance.
 
-### Installation
-Download SignSavvy from the App Store or Google Play:
-
-For iOS:
-```
-https://apps.apple.com/us/app/SignSavvy/idxxxxxxxx
-```
-
-For Android:
-```
-https://play.google.com/store/apps/details?id=com.SignSavvy
-```
-
 ### Usage Instructions
 1. Open SignSavvy and complete the registration or login process.
 2. Navigate to the 'Recognition' to start translating hand gestures or 'Speech to Text' for voice translations.
