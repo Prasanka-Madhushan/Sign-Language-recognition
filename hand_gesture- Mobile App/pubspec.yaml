@@ -57,6 +57,7 @@ dependencies:
   flutter_icons_null_safety: ^1.1.0
   flutter_webrtc: ^0.10.3
   socket_io_client: ^2.0.3+1
+  model_viewer_plus: ^1.7.2
     
 
 
@@ -100,7 +101,7 @@ flutter:
   - assets/logo/
   - assets/ISL_Gifs/
   - assets/letters/
-  - assets/model_unquant.tflite
+  - assets/model.tflite
   - assets/labels.txt
   - images/
   - images/dict/
