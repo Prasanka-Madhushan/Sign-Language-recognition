@@ -13,20 +13,6 @@ SignSavvy is an innovative mobile application built with Flutter that offers rea
 - **Web Application Support:** Use our web application for hand gesture recognition and word prediction, available on any standard web browser.
 - **User-Friendly Interface:** Enjoy a seamless and intuitive user experience tailored for accessibility and ease of use.
 
-## Application Screenshots
-
-### Home Screen
-Navigate easily through SignSavvy's diverse features from the main dashboard.
-![Home Screen](images/home.png "Home Screen")
-
-### Sign Recognition
-Experience real-time sign language recognition and translation.
-![Sign Recognition](images/sign_recognition.png "Sign Recognition")
-
-### Learning Tools
-Access educational materials and tutorials to enhance your sign language skills.
-![Learning Tools](images/learning_tools.png "Learning Tools")
-
 
 ## Getting Started
 
